@@ -4,9 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use Illuminate\Http\Request;
+use App\Repositories\PostRepository;
 
 class PostController extends Controller
 {
+    private PostRepository $postRepository;
+
+    public function __construct(PostRepository $postRepository) 
+    {
+        $this->postRepository = $postRepository;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +22,9 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+        return view('posts.index',[
+            'posts'=> $this->postRepository->getAllPosts()
+        ]);
     }
 
     /**
@@ -47,7 +57,7 @@ class PostController extends Controller
     public function show(Post $post)
     {
         return view('posts.show',[
-            'post'=>$post
+            'post'=> $post
         ]);
     }
 
