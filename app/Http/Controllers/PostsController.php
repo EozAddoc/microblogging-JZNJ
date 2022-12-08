@@ -51,7 +51,8 @@ class PostsController extends Controller
     public function store(Request $request)
     {
         // posts::create($request->all());
-        var_dump($request->all()); die;
+        var_dump($request->all());
+        die;
         // $user_id = auth()->user()->id;
         // posts::create($request->$user_id + all());
 
