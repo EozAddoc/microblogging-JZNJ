@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Kris\LaravelFormBuilder\FormBuilder;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use App\Repositories\PostRepository;
@@ -10,9 +11,10 @@ class PostController extends Controller
 {
     private PostRepository $postRepository;
 
-    public function __construct(PostRepository $postRepository) 
+    private $formBuilder;
+    public function __construct(FormBuilder $formBuilder)
     {
-        $this->postRepository = $postRepository;
+        $this->formBuilder = $formBuilder;
     }
 
     /**
@@ -22,9 +24,9 @@ class PostController extends Controller
      */
     public function index()
     {
-        return view('posts.index',[
-            'posts'=> $this->postRepository->getAllPosts()
-        ]);
+        $posts = Post::all();
+
+        return view('posts.index', compact('posts'));
     }
 
     /**
@@ -34,7 +36,9 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        $form = $this->formBuilder->create(\App\Forms\PostForm::class);
+        // echo auth()->user();
+        return view('posts.create', compact("form"));
     }
 
     /**
@@ -45,7 +49,12 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // posts::create($request->all());
+        var_dump($request->all()); die;
+        // $user_id = auth()->user()->id;
+        // posts::create($request->$user_id + all());
+
+        return back()->with('message', 'item stored successfully');
     }
 
     /**
@@ -69,29 +78,33 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        //
+        return view('posts.edit', compact('posts'));
     }
 
-    /**
+     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Post  $post
+     * @param  \Illuminate\Http\Request $request
+     * @param  \App\Models\posts $posts
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Post $post)
     {
-        //
+        $post->update($request->all());
+
+        return back()->with('message', 'item updated successfully');
     }
 
-    /**
+   /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Post  $post
+     * @param  \App\Models\Post $post
      * @return \Illuminate\Http\Response
      */
     public function destroy(Post $post)
     {
-        //
+        $post->delete();
+
+        return back()->with('message', 'item deleted successfully');
     }
 }
