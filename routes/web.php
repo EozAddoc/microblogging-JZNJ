@@ -30,8 +30,10 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profil e', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 Route::resource('posts', PostController::class);
-Route::get('allposts', [PostController::class, 'index']);
-Route::get('insertPost', [PostController::class, 'create']);
+Route::get('/allposts', [PostController::class, 'index'])->name('allposts.index');
+Route::get('/insertPost', [PostController::class, 'create'])->name('insertPost.create');
 Route::post('insertPost', [PostController::class, 'store']);
+
+Route::get('profilePage',[ProfileController::class, 'watch'] )->name('profilePage.watch');
 
 require __DIR__.'/auth.php';

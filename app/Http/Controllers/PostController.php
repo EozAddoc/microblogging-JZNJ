@@ -1,11 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\DB;
 use Kris\LaravelFormBuilder\FormBuilder;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use App\Repositories\PostRepository;
+use Carbon\Carbon;
 
 class PostController extends Controller
 {
@@ -49,6 +50,19 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+
+        $post = DB::table('posts')->insert([
+            'description' => $request->description,
+            'img_url' => $request->img_url,
+            'user_id'=>auth()->user()->id,
+            'created_at'=>Carbon::now()->format('Y-m-d'),
+            'updated_at'=> $request->updated_at
+         ]);
+         if ($post) {
+            echo "User inserted successfully!";
+         } else {
+            echo "Error while inserting user details";
+         }
         // posts::create($request->all());
         var_dump($request->all()); die;
         // $user_id = auth()->user()->id;

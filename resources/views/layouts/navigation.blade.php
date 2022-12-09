@@ -17,6 +17,21 @@
                     </x-nav-link>
                 </div>
             </div>
+            <div>
+                <a type="button" href="{{ route('insertPost.create') }}">
+                    Add post
+</a>
+            </div>
+            <div>
+                <a type="button" href="{{ route('allposts.index') }}">
+                    Posts
+</a>
+            </div>
+            <div>
+                <a type="button" href="{{ route('profilePage.watch') }}">
+                    Profile
+</a>
+            </div>
 
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ml-6">
