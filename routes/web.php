@@ -31,9 +31,9 @@ Route::middleware('auth')->group(function () {
 });
 Route::resource('posts', PostController::class);
 Route::get('/allposts', [PostController::class, 'index'])->name('allposts.index');
-Route::get('/insertPost', [PostController::class, 'create'])->name('insertPost.create');
-Route::post('insertPost', [PostController::class, 'store']);
+Route::get('/addPost', [PostController::class, 'create'])->name('insertPost.create');
+Route::post('addPost', [PostController::class, 'store']);
 
-Route::get('profilePage',[ProfileController::class, 'watch'] )->name('profilePage.watch');
+Route::get('profilePage',[PostController::class, 'userPosts'] )->name('profilePage.userPosts');
 
 require __DIR__.'/auth.php';

@@ -28,7 +28,7 @@
 </a>
             </div>
             <div>
-                <a type="button" href="{{ route('profilePage.watch') }}">
+                <a type="button" href="{{ route('profilePage.userPosts') }}">
                     Profile
 </a>
             </div>

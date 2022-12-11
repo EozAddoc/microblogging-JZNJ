@@ -7,10 +7,10 @@ use App\Models\Post;
 use Illuminate\Http\Request;
 use App\Repositories\PostRepository;
 use Carbon\Carbon;
+use app\Http\Controllers\Auth;
 
 class PostController extends Controller
 {
-    private PostRepository $postRepository;
 
     private $formBuilder;
     public function __construct(FormBuilder $formBuilder)
@@ -29,6 +29,13 @@ class PostController extends Controller
 
         return view('posts.index', compact('posts'));
     }
+    public function userPosts() {
+       
+
+        $posts = DB::table('posts')->where('user_id', auth()->id())->get();
+        return view('profilePage', compact('posts'));
+
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -41,6 +48,7 @@ class PostController extends Controller
         // echo auth()->user();
         return view('posts.create', compact("form"));
     }
+  
 
     /**
      * Store a newly created resource in storage.
@@ -63,12 +71,9 @@ class PostController extends Controller
          } else {
             echo "Error while inserting user details";
          }
-        // posts::create($request->all());
-        var_dump($request->all()); die;
-        // $user_id = auth()->user()->id;
-        // posts::create($request->$user_id + all());
+         $posts = Post::all();
+         return view('posts.index', compact('posts'));
 
-        return back()->with('message', 'item stored successfully');
     }
 
     /**

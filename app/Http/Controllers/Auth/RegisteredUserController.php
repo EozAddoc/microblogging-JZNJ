@@ -41,7 +41,11 @@ class RegisteredUserController extends Controller
 
         $user = User::create([
             'name' => $request->name,
+            'username'=>'usersname',
             'email' => $request->email,
+            'img'=>'https://st2.depositphotos.com/1104517/11965/v/950/depositphotos_119659092-stock-illustration-male-avatar-profile-picture-vector.jpg',
+            'bio'=>'Here is a long bio otherwise css doesnt work I dont know how or why or when to fix it someone help I hate front things but I also want it to be pretty',
+            'website'=>'example.com',
             'password' => Hash::make($request->password),
         ]);
 
