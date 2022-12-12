@@ -16,9 +16,9 @@
                     </a>
                 </div>
             </header>
-            <img class="w-full max-w-full min-w-full"
+            <button type="button" data-toggle="modal" data-target="#Modalpopup"><img class="w-full max-w-full min-w-full"
             src="{{ $post->img_url }}"
-                alt="post">
+                alt="post"></button>
 
             <div class="px-6 pt-4">
                 <div>
@@ -50,7 +50,6 @@
         </div>
     </div>
     </div>
-
 @endforeach
 </x-guest-layout>
 </x-app-layout>

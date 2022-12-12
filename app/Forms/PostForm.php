@@ -11,7 +11,7 @@ class PostForm extends Form
     {
         $this->formOptions=[
             "method"=>"POST",
-            "url"=>"/posts2"
+            "url"=>"/addPost"
         ];
         $this->add("description")->add("img_url")->add("submit", "submit", [
             "label"=>"Valider"

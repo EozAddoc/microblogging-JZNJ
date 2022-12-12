@@ -1,18 +1,21 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\DB;
+use Kris\LaravelFormBuilder\FormBuilder;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use App\Repositories\PostRepository;
+use Carbon\Carbon;
+use app\Http\Controllers\Auth;
 
 class PostController extends Controller
 {
-    private PostRepository $postRepository;
 
-    public function __construct(PostRepository $postRepository) 
+    private $formBuilder;
+    public function __construct(FormBuilder $formBuilder)
     {
-        $this->postRepository = $postRepository;
+        $this->formBuilder = $formBuilder;
     }
 
     /**
@@ -22,9 +25,16 @@ class PostController extends Controller
      */
     public function index()
     {
-        return view('posts.index',[
-            'posts'=> $this->postRepository->getAllPosts()
-        ]);
+        $posts = Post::all();
+
+        return view('posts.index', compact('posts'));
+    }
+    public function userPosts() {
+       
+
+        $posts = DB::table('posts')->where('user_id', auth()->id())->get();
+        return view('profilePage', compact('posts'));
+
     }
 
     /**
@@ -34,8 +44,11 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        $form = $this->formBuilder->create(\App\Forms\PostForm::class);
+        // echo auth()->user();
+        return view('posts.create', compact("form"));
     }
+  
 
     /**
      * Store a newly created resource in storage.
@@ -45,7 +58,22 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $post = DB::table('posts')->insert([
+            'description' => $request->description,
+            'img_url' => $request->img_url,
+            'user_id'=>auth()->user()->id,
+            'created_at'=>Carbon::now()->format('Y-m-d'),
+            'updated_at'=> $request->updated_at
+         ]);
+         if ($post) {
+            echo "User inserted successfully!";
+         } else {
+            echo "Error while inserting user details";
+         }
+         $posts = Post::all();
+         return view('posts.index', compact('posts'));
+
     }
 
     /**
@@ -69,29 +97,33 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        //
+        return view('posts.edit', compact('posts'));
     }
 
-    /**
+     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Post  $post
+     * @param  \Illuminate\Http\Request $request
+     * @param  \App\Models\posts $posts
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Post $post)
     {
-        //
+        $post->update($request->all());
+
+        return back()->with('message', 'item updated successfully');
     }
 
-    /**
+   /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Post  $post
+     * @param  \App\Models\Post $post
      * @return \Illuminate\Http\Response
      */
     public function destroy(Post $post)
     {
-        //
+        $post->delete();
+
+        return back()->with('message', 'item deleted successfully');
     }
 }
