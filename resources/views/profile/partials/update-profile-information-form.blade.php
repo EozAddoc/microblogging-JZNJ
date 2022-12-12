@@ -27,6 +27,11 @@
             <x-text-input id="username" name="username" type="text" class="mt-1 block w-full" :value="old('username', $user->username)" required autofocus autocomplete="username" />
             <x-input-error class="mt-2" :messages="$errors->get('username')" />
         </div>
+        <div>
+            <x-input-label for="img" :value="__('Image')" />
+            <x-text-input id="img" name="img" type="text" class="mt-1 block w-full" :value="old('img', $user->img)" required autofocus autocomplete="img" />
+            <x-input-error class="mt-2" :messages="$errors->get('img')" />
+        </div>
 
         <div>
             <x-input-label for="email" :value="__('Email')" />

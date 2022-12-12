@@ -34,7 +34,7 @@ use app\Models\User;
         <div class="md:w-3/12 md:ml-16">
           <!-- profile image -->
           <img class="w-20 h-20 md:w-40 md:h-40 object-cover rounded-full
-                     border-2 border-pink-600 p-1" src="https://www.bytewebster.com/img/logo.png" alt="profile">
+                     border-2 border-pink-600 p-1" src="{{$userPostCount->img}}" alt="profile">
         </div>
 
         <!-- profile meta -->
