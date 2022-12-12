@@ -7,11 +7,11 @@ use app\Models\User;
 <x-app-layout>
 <x-guest-layout>
   
-  <main class="bg-gray-100 bg-opacity-25">
+  <main class="bg-gray-50 bg-opacity-25">
 
-    <div class="lg:w-8/12 lg:mx-auto mb-8">
+    <div class="mb-8">
 
-      <header class="flex flex-wrap items-center p-4 md:py-8">
+      <header class="flex flex-wrap items-center justify-center p-4 md:py-8">
         <style>
           .pb-full {
             padding-bottom: 100%;
@@ -32,24 +32,21 @@ use app\Models\User;
             }
           }
         </style>
-        <div class="md:w-3/12 md:ml-16">
+        <div class="md:mr-16">
           <!-- profile image -->
-          <img class="w-20 h-20 md:w-40 md:h-40 object-cover rounded-full
-                     border-2 border-pink-600 p-1" src="{{$userPostCount->img}}" alt="profile">
+          <img class="w-20 h-20 md:w-40 md:h-40 object-cover rounded-full border-2 border-pink-600 p-1" src="{{$userPostCount->img}}" alt="profile">
         </div>
 
         <!-- profile meta -->
-        <div class="w-8/12 md:w-7/12 ml-4">
+        <div class="w-8/12 md:w-4/12 ml-4">
           <div class="md:flex md:flex-wrap md:items-center mb-4">
             <h2 class="text-3xl inline-block font-light md:mr-2 mb-2 sm:mb-0">
               {{ Auth::user()->name }}
             </h2>
 
             <!-- badge -->
-            <span class="inline-block fas fa-certificate fa-lg text-blue-500 
-                               relative mr-6  text-xl transform -translate-y-2" aria-hidden="true">
-              <i class="fas fa-check text-white text-xs absolute inset-x-0
-                               ml-1 mt-px"></i>
+            <span class="inline-block fas fa-certificate fa-lg text-blue-500 relative mr-6  text-xl transform -translate-y-2" aria-hidden="true">
+              <i class="fas fa-check text-white text-xs absolute inset-x-0 ml-1 mt-px"></i>
             </span>
 
             <!-- Edit button -->
@@ -65,14 +62,14 @@ use app\Models\User;
               posts 
             </li>
 
-            <li>
+            <!-- <li>
               <span class="font-semibold">50.5k</span>
               followers
             </li>
             <li>
               <span class="font-semibold">10</span>
               following
-            </li>
+            </li> -->
           </ul>
           <!-- user meta form medium screens -->
           <div class="hidden md:block">
@@ -102,7 +99,7 @@ use app\Models\User;
             <span class="font-semibold text-gray-800 block">6</span>
             posts
           </li>
-
+<!-- 
           <li>
             <span class="font-semibold text-gray-800 block">50.5k</span>
             followers
@@ -110,7 +107,7 @@ use app\Models\User;
           <li>
             <span class="font-semibold text-gray-800 block">10</span>
             following
-          </li>
+          </li> -->
         </ul>
         <br>
         <br>
@@ -130,7 +127,7 @@ use app\Models\User;
         <div class="flex flex-wrap -mx-px md:-mx-3">
 
           <!-- column -->
-          <div class="w-1/3 p-px md:px-3">
+          <!-- <div class="w-1/3 p-px md:px-3"> -->
             <!-- post 1-->
             @foreach ($posts as $post)
 
@@ -139,9 +136,6 @@ use app\Models\User;
                 <!-- inside card -->
                 <div class="w-fit rounded overflow-hidden shadow-none">
                   <header class="flex flex-start">
-                    <div>
-                     
-                    </div>
                   </header>
                   <img class="w-full max-w-full min-w-full" src="{{ $post->img_url }}" alt="post">
 
@@ -168,7 +162,7 @@ use app\Models\User;
             </div>
 
             @endforeach
-          </div>
+          <!-- </div> -->
         </div>
       </div>
   </main>

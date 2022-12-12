@@ -10,7 +10,7 @@ use app\Models\User;
         @foreach ($posts as $post)
 
         <div class="max-w-sm m-4">
-            <!-- <div class="rounded-2xl shadow-xl bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300"> -->
+            <!-- <div class="rounded-2xl shadow-xl bg-gray-50 dark:bg-gray-800 text-gray-700 dark:text-gray-300"> -->
             <div class="rounded-2xl shadow-xl bg-white text-gray-700">
                 <!-- inside card -->
                 <div class="w-fit rounded overflow-hidden shadow-none">
