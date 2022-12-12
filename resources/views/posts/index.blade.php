@@ -8,7 +8,14 @@
         <div class="w-fit rounded overflow-hidden shadow-none">
             <header class="flex flex-start">
                 <div>
-                    <a href="/allposts/{{$post->user->id}}" class="cursor-pointer m-4 flex items-center text-sm outline-none focus:outline-none focus:border-gray-300 transition duration-150 ease-in-out">
+                    <?php
+                    if($post->user->id === auth()->user()->id){
+                        $route = "/profilePage";
+                    } else {
+                        $route = "/allposts/" . strval($post->user->id);
+                    }
+                    ?>
+                    <a href={{$route}} class="cursor-pointer m-4 flex items-center text-sm outline-none focus:outline-none focus:border-gray-300 transition duration-150 ease-in-out">
                         <div>
                             <p class="block ml-2 text-lg font-bold">{{$post->user->name}}</p>
                             <span class="block ml-2 text-xs text-gray-600">Published on {{$post->created_at->format('jS \of F Y')}} at {{$post->created_at->format('h:i A')}}</span>
