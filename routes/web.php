@@ -34,6 +34,11 @@ Route::get('/allposts', [PostController::class, 'index'])->name('allposts.index'
 Route::get('/addPost', [PostController::class, 'create'])->name('insertPost.create');
 Route::post('addPost', [PostController::class, 'store']);
 
+Route::get('allposts/{id}', function ($id) {
+    $posts = App\Models\Post::all()->where('user_id', $id);
+    return view('posts.index', compact('posts'));
+});
+
 Route::get('profilePage',[PostController::class, 'userPosts'] )->name('profilePage.userPosts');
 
 require __DIR__.'/auth.php';

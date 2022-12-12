@@ -37,6 +37,12 @@ class PostController extends Controller
 
     }
 
+    public function findById($toto)
+    {
+        $posts = DB::table('posts')->where('user_id', $toto);
+
+        return view('posts.findById', compact('posts'));
+    }
     /**
      * Show the form for creating a new resource.
      *
