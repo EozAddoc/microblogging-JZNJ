@@ -4,6 +4,7 @@ use app\Models\User;
  $user= User::where('id', $userId);
  $userPostCount = User::where('id', $userId)->withCount('posts')->first()
 ?>
+<x-app-layout>
 <x-guest-layout>
   
   <main class="bg-gray-100 bg-opacity-25">
@@ -172,3 +173,4 @@ use app\Models\User;
       </div>
   </main>
 </x-guest-layout>
+</x-app-layout>

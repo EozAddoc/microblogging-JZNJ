@@ -14,24 +14,18 @@
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
+                    Home
+                    </x-nav-link>
+                    <x-nav-link :href="route('insertPost.create')" :active="request()->routeIs('insertPost.create')">
+                    New Post
+                    </x-nav-link>
+                    <x-nav-link :href="route('allposts.index')" :active="request()->routeIs('allposts.index')">
+                    All Posts
+                    </x-nav-link>
+                    <x-nav-link :href="route('profilePage.userPosts')" :active="request()->routeIs('profilePage.userPosts')">
+                    My Profile
                     </x-nav-link>
                 </div>
-            </div>
-            <div>
-                <a type="button" href="{{ route('insertPost.create') }}">
-                    Add post
-</a>
-            </div>
-            <div>
-                <a type="button" href="{{ route('allposts.index') }}">
-                    Posts
-</a>
-            </div>
-            <div>
-                <a type="button" href="{{ route('profilePage.userPosts') }}">
-                    Profile
-</a>
             </div>
 
             <!-- Settings Dropdown -->

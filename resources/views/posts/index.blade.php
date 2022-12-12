@@ -1,3 +1,7 @@
+<?php
+use app\Models\User;
+?>
+
 <x-app-layout>
 <x-guest-layout>
 @foreach ($posts as $post)
@@ -9,6 +13,12 @@
 
         
             <header class="flex flex-start">
+            <?php
+                        $userId = $post->user->id;
+                        $user = User::where('id', $userId);
+                        $userPostCount = User::where('id', $userId)->withCount('posts')->first();
+
+                        ?>
                 <div>
                     <?php
                     if($post->user->id === auth()->user()->id){
@@ -19,7 +29,7 @@
                     ?>
                     <a href={{$route}} class="cursor-pointer m-4 flex items-center text-sm outline-none focus:outline-none focus:border-gray-300 transition duration-150 ease-in-out">
 
-                    <img src="https://images.pexels.com/photos/3460478/pexels-photo-3460478.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" class="h-9 w-9 rounded-full object-cover"
+                    <img src="{{$userPostCount->img}}" class="h-9 w-9 rounded-full object-cover"
                         alt="usuario" />
                         <div>
                             <p class="block ml-2 text-lg font-bold">{{$post->user->name}}</p>
