@@ -5,7 +5,6 @@ use app\Models\User;
 
 
 ?>
-<x-app-layout>
     <x-guest-layout>
         @foreach ($posts as $post)
 
@@ -106,7 +105,6 @@ use app\Models\User;
         </div>
         @endforeach
     </x-guest-layout>
-</x-app-layout>
 
 <style>
     .modal-header {
