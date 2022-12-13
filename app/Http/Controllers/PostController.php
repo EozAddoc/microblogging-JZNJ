@@ -72,13 +72,9 @@ class PostController extends Controller
             'created_at'=>Carbon::now()->format('Y-m-d'),
             'updated_at'=> $request->updated_at
          ]);
-         if ($post) {
-            echo "User inserted successfully!";
-         } else {
-            echo "Error while inserting user details";
-         }
+         
          $posts = Post::all();
-         return view('posts.index', compact('posts'));
+         return view('posts.index', compact('posts'))->with('status', 'post added successfully');
 
     }
 
@@ -117,8 +113,14 @@ class PostController extends Controller
     {
         $post->update($request->all());
 
-        return back()->with('message', 'item updated successfully');
+        return back()->with('status', 'item updated successfully');
     }
+    public function updateForm( $p)
+    {
+        $posts =DB::table('posts')->where('id', $p)->first();
+       return view('posts.updatePost', compact('posts'));
+    }
+    
 
    /**
      * Remove the specified resource from storage.
@@ -130,6 +132,6 @@ class PostController extends Controller
     {
         $post->delete();
 
-        return back()->with('message', 'item deleted successfully');
+        return back()->with('status', 'item deleted successfully');
     }
 }

@@ -30,10 +30,10 @@ use app\Models\User;
                             <?php
                         $userId = $post->user->id;
                         $user = User::where('id', $userId);
-                        $userPostCount = User::where('id', $userId)->withCount('posts')->first();
+                        $userImg = User::where('id', $userId)->withCount('posts')->first();
 
                         ?>
-                                <img src="{{$userPostCount->img}}" class="h-9 w-9 rounded-full object-cover" alt="usuario" />
+                                <img src="{{$userImg->img}}" class="h-9 w-9 rounded-full object-cover" alt="usuario" />
                                 <div>
                                     <p class="block ml-2 text-lg font-bold">{{$post->user->name}}</p>
                                     <span class="block ml-2 text-xs text-gray-600">Published on {{$post->created_at->format('jS \of F Y')}} at {{$post->created_at->format('h:i A')}}</span>

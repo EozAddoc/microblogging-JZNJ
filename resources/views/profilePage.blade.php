@@ -1,12 +1,14 @@
 <?php
+
 use app\Models\User;
- $userId = auth()->user()->id;
- $user= User::where('id', $userId);
- $userPostCount = User::where('id', $userId)->withCount('posts')->first()
+
+$userId = auth()->user()->id;
+$user = User::where('id', $userId);
+$userPostCount = User::where('id', $userId)->withCount('posts')->first()
 ?>
 <x-app-layout>
 <x-guest-layout>
-  
+
   <main class="bg-gray-100 bg-opacity-25">
 
     <div class="lg:w-8/12 lg:mx-auto mb-8">
@@ -32,6 +34,7 @@ use app\Models\User;
             }
           }
         </style>
+
         <div class="md:w-3/12 md:ml-16">
           <!-- profile image -->
           <img class="w-20 h-20 md:w-40 md:h-40 object-cover rounded-full
@@ -62,7 +65,7 @@ use app\Models\User;
           <ul class="hidden md:flex space-x-8 mb-4">
             <li>
               <span class="font-semibold">{{$userPostCount->posts_count}}</span>
-              posts 
+              posts
             </li>
 
             <li>
@@ -85,9 +88,9 @@ use app\Models\User;
 
         <!-- user meta form small screens -->
         <div class="md:hidden text-sm my-2">
-        <h1 class="font-semibold">{{$userPostCount->username}}</h1>
-        <span class="bioclass">{{$userPostCount->website}}</span>
-            <p>{{$userPostCount->bio}}</p>
+          <h1 class="font-semibold">{{$userPostCount->username}}</h1>
+          <span class="bioclass">{{$userPostCount->website}}</span>
+          <p>{{$userPostCount->bio}}</p>
         </div>
 
       </header>
@@ -137,10 +140,29 @@ use app\Models\User;
             <div class="max-w-sm m-4">
               <div class="rounded-2xl shadow-xl">
                 <!-- inside card -->
+                <div class="menu-nav">
+                  <div class="dropdown-container" tabindex="-1">
+                    <div class="three-dots"></div>
+                    <div class="dropdown">
+              
+                 <form method="POST" action= "{{route('profilePage.destroy',$post->id )}}"
+                 onsubmit="return confirm('Are you sure?');">
+                 @csrf
+                 @method('Delete')
+                 <button class="text-red-400 hover:text-red-600" type="submit" >Delete</button>
+                </form>
+      
+               
+                <a class="text-blue-400 hover:text-blue-600" href="{{route('updatePost.updateForm',$post->id )}}"type="submit" >Modify</a>
+                  
+                    </div>
+                  </div>
+                </div>
+
                 <div class="w-fit rounded overflow-hidden shadow-none">
                   <header class="flex flex-start">
                     <div>
-                     
+
                     </div>
                   </header>
                   <img class="w-full max-w-full min-w-full" src="{{ $post->img_url }}" alt="post">
@@ -173,4 +195,42 @@ use app\Models\User;
       </div>
   </main>
 </x-guest-layout>
-</x-app-layout>
+<style>
+  .menu-nav {
+
+    display: flex;
+  }
+
+  .menu-item {
+    color: #FCC;
+    padding: 3px;
+  }
+
+  .three-dots:after {
+    cursor: pointer;
+    color: #444;
+    content: '\2807';
+    font-size: 20px;
+  }
+
+  
+
+  .dropdown {
+    outline: none;
+    opacity: 0;
+    z-index: -1;
+    max-height: 0;
+    transition: opacity 0.1s, z-index 0.1s, max-height 5s;
+  };
+
+  .dropdown-container:focus {
+    outline: none;
+  }
+
+  .dropdown-container:focus .dropdown {
+    opacity: 1;
+    z-index: 100;
+    max-height: 100vh;
+    transition: opacity 0.2s, z-index 0.2s, max-height 0.2s;
+  }
+</style>
