@@ -1,4 +1,5 @@
 <?php
+
 use Illuminate\Support\Facades\DB;
 
 use App\Models\Post;
@@ -24,7 +25,7 @@ Route::get('/', function () {
 
 Route::get('/dashboard', function () {
     $posts = Post::all();
-    return view('dashboard',compact('posts'));
+    return view('dashboard', compact('posts'));
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
@@ -41,12 +42,12 @@ Route::post('updatePost/{post}', [PostController::class, 'update'])->name('updat
 
 Route::get('allposts/{id}', function ($id) {
     $posts = App\Models\Post::all()->where('user_id', $id);
-    $first =Post::all()->where('user_id', $id)->first();
-    return view('profile.otherUserProfile', compact('posts','first'));
+    $first = Post::all()->where('user_id', $id)->first();
+    return view('profile.otherUserProfile', compact('posts', 'first'));
 });
 
-Route::get('/profilePage',[PostController::class, 'userPosts'] )->name('profilePage.userPosts');
-Route::patch('/profilePage',[PostController::class, 'update'] )->name('profilePage.update');
-Route::delete('profilePage/{post}',[PostController::class, 'destroy'] )->name('profilePage.destroy');
+Route::get('/profilePage', [PostController::class, 'userPosts'])->name('profilePage.userPosts');
+Route::patch('/profilePage', [PostController::class, 'update'])->name('profilePage.update');
+Route::delete('profilePage/{post}', [PostController::class, 'destroy'])->name('profilePage.destroy');
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
