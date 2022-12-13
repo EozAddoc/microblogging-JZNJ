@@ -1,5 +1,8 @@
 <?php
 
+use Illuminate\Support\Facades\DB;
+
+use App\Models\Post;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
@@ -21,7 +24,8 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    $posts = Post::all();
+    return view('dashboard', compact('posts'));
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
@@ -33,12 +37,17 @@ Route::resource('posts', PostController::class);
 Route::get('/allposts', [PostController::class, 'index'])->name('allposts.index');
 Route::get('/addPost', [PostController::class, 'create'])->name('insertPost.create');
 Route::post('addPost', [PostController::class, 'store']);
+Route::get('updatePost/{post}', [PostController::class, 'updateForm'])->name('updatePost.updateForm');
+Route::post('updatePost/{post}', [PostController::class, 'update'])->name('updatePost.update');
 
 Route::get('allposts/{id}', function ($id) {
     $posts = App\Models\Post::all()->where('user_id', $id);
-    return view('posts.index', compact('posts'));
+    $first = Post::all()->where('user_id', $id)->first();
+    return view('profile.otherUserProfile', compact('posts', 'first'));
 });
 
-Route::get('profilePage',[PostController::class, 'userPosts'] )->name('profilePage.userPosts');
+Route::get('/profilePage', [PostController::class, 'userPosts'])->name('profilePage.userPosts');
+Route::patch('/profilePage', [PostController::class, 'update'])->name('profilePage.update');
+Route::delete('profilePage/{post}', [PostController::class, 'destroy'])->name('profilePage.destroy');
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

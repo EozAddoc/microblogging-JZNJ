@@ -19,9 +19,6 @@
                     <x-nav-link :href="route('insertPost.create')" :active="request()->routeIs('insertPost.create')">
                     New Post
                     </x-nav-link>
-                    <x-nav-link :href="route('allposts.index')" :active="request()->routeIs('allposts.index')">
-                    All Posts
-                    </x-nav-link>
                     <x-nav-link :href="route('profilePage.userPosts')" :active="request()->routeIs('profilePage.userPosts')">
                     My Profile
                     </x-nav-link>
