@@ -6,7 +6,6 @@ $userId = auth()->user()->id;
 $user = User::where('id', $userId);
 $userPostCount = User::where('id', $userId)->withCount('posts')->first()
 ?>
-<x-app-layout>
 <x-guest-layout>
 
   <main class="bg-gray-100 bg-opacity-25">
