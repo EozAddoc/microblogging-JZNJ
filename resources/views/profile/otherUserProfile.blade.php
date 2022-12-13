@@ -1,10 +1,9 @@
 <?php
 
 use app\Models\User;
-
+$test =$first->user_id;
 $userId = auth()->user()->id;
-$user = User::where('id', $userId);
-$userPostCount = User::where('id', $userId)->withCount('posts')->first()
+$userPostCount = User::where('id', $test)->withCount('posts')->first()
 ?>
 <x-guest-layout>
 
@@ -44,7 +43,7 @@ $userPostCount = User::where('id', $userId)->withCount('posts')->first()
         <div class="w-8/12 md:w-7/12 ml-4">
           <div class="md:flex md:flex-wrap md:items-center mb-4">
             <h2 class="text-3xl inline-block font-light md:mr-2 mb-2 sm:mb-0">
-              {{ Auth::user()->name }}
+              {{$userPostCount->name}}
             </h2>
 
             <!-- badge -->
@@ -55,9 +54,9 @@ $userPostCount = User::where('id', $userId)->withCount('posts')->first()
             </span>
 
             <!-- Edit button -->
-            <a href="{{ route('profile.edit') }}" class="bg-blue-500 px-2 py-1 
+            <a href="#" class="bg-blue-500 px-2 py-1 
                         text-white font-semibold text-sm rounded block text-center 
-                        sm:inline-block block hover:bg-blue-800">Edit</a>
+                        sm:inline-block block hover:bg-blue-800">Follow</a>
           </div>
 
           <!-- post, following, followers list for medium screens -->
@@ -139,24 +138,6 @@ $userPostCount = User::where('id', $userId)->withCount('posts')->first()
             <div class="max-w-sm m-4">
               <div class="rounded-2xl shadow-xl">
                 <!-- inside card -->
-                <div class="menu-nav">
-                  <div class="dropdown-container" tabindex="-1">
-                    <div class="three-dots"></div>
-                    <div class="dropdown">
-
-                      <form method="POST" action="{{route('profilePage.destroy',$post->id )}}" onsubmit="return confirm('Are you sure?');">
-                        @csrf
-                        @method('Delete')
-                        <button class="text-red-400 hover:text-red-600" type="submit">Delete</button>
-                      </form>
-
-
-                      <a class="text-blue-400 hover:text-blue-600" href="{{route('updatePost.updateForm',$post->id )}}" type="submit">Modify</a>
-
-                    </div>
-                  </div>
-                </div>
-
                 <div class="w-fit rounded overflow-hidden shadow-none">
                   <header class="flex flex-start">
                     <div>
@@ -193,44 +174,3 @@ $userPostCount = User::where('id', $userId)->withCount('posts')->first()
       </div>
   </main>
 </x-guest-layout>
-<style>
-  .menu-nav {
-
-    display: flex;
-  }
-
-  .menu-item {
-    color: #FCC;
-    padding: 3px;
-  }
-
-  .three-dots:after {
-    cursor: pointer;
-    color: #444;
-    content: '\2807';
-    font-size: 20px;
-  }
-
-
-
-  .dropdown {
-    outline: none;
-    opacity: 0;
-    z-index: -1;
-    max-height: 0;
-    transition: opacity 0.1s, z-index 0.1s, max-height 5s;
-  }
-
-  ;
-
-  .dropdown-container:focus {
-    outline: none;
-  }
-
-  .dropdown-container:focus .dropdown {
-    opacity: 1;
-    z-index: 100;
-    max-height: 100vh;
-    transition: opacity 0.2s, z-index 0.2s, max-height 0.2s;
-  }
-</style>

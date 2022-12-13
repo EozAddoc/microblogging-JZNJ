@@ -1,4 +1,5 @@
 <?php
+use Illuminate\Support\Facades\DB;
 
 use App\Models\Post;
 use App\Http\Controllers\ProfileController;
@@ -40,7 +41,8 @@ Route::post('updatePost/{post}', [PostController::class, 'update'])->name('updat
 
 Route::get('allposts/{id}', function ($id) {
     $posts = App\Models\Post::all()->where('user_id', $id);
-    return view('posts.index', compact('posts'));
+    $first =Post::all()->where('user_id', $id)->first();
+    return view('profile.otherUserProfile', compact('posts','first'));
 });
 
 Route::get('/profilePage',[PostController::class, 'userPosts'] )->name('profilePage.userPosts');
