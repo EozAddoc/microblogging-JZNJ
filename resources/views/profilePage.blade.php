@@ -135,9 +135,24 @@ $userPostCount = User::where('id', $userId)->withCount('posts')->first()
           <div class="w-1/3 p-px md:px-3">
             <!-- post 1-->
             @foreach ($posts as $post)
+          
 
             <div class="max-w-sm m-4">
-              <div class="rounded-2xl shadow-xl">
+              <div class="rounded-2xl shadow-xl bg-white text-gray-700">
+              <div class="w-fit rounded overflow-hidden shadow-none">
+              <header class="flex flex-start">
+                        <div>
+                            <a href="#" class="cursor-pointer m-4 flex items-center text-sm outline-none focus:outline-none focus:border-gray-300 transition duration-150 ease-in-out">
+                        
+                                <img src="{{$userPostCount->img}}" class="h-9 w-9 rounded-full object-cover" alt="usuario" />
+                                <div>
+                                    <p class="block ml-2 text-sm font-bold">{{$userPostCount->name}}</p>
+                                    <span class="block ml-2 text-xs text-gray-600">Published on {{$userPostCount->created_at}}</span>
+                                </div>
+                            </a>
+                        </div>
+                        
+                    </header>
                 <!-- inside card -->
                 <div class="menu-nav">
                   <div class="dropdown-container" tabindex="-1">
@@ -185,6 +200,7 @@ $userPostCount = User::where('id', $userId)->withCount('posts')->first()
                   </div>
                 </div>
               </div>
+            </div>
             </div>
 
             @endforeach
