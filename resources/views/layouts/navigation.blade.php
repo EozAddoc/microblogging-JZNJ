@@ -9,6 +9,7 @@
                     <a href="{{ route('dashboard') }}">
                             <x-application-logo/>
                     </a>
+                    
                 </div>
             </div>
             <div class="flex">
