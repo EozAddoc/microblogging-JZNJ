@@ -6,6 +6,7 @@ $userId = auth()->user()->id;
 $user = User::where('id', $userId);
 $userPostCount = User::where('id', $userId)->withCount('posts')->first()
 ?>
+<x-app-layout>
 <x-guest-layout>
   
   <main class="bg-gray-50 bg-opacity-25">
@@ -41,9 +42,9 @@ $userPostCount = User::where('id', $userId)->withCount('posts')->first()
         <!-- profile meta -->
         <div class="w-8/12 md:w-4/12 ml-4">
           <div class="md:flex md:flex-wrap md:items-center mb-4">
-            <h2 class="text-3xl inline-block font-light md:mr-2 mb-2 sm:mb-0">
+            <span class="text-3xl inline-block font-light md:mr-2 mb-2 sm:mb-0">
               {{ Auth::user()->name }}
-            </h2>
+            </span>
 
             <!-- badge -->
             <span class="inline-block fas fa-certificate fa-lg text-blue-500 relative mr-6  text-xl transform -translate-y-2" aria-hidden="true">
@@ -52,7 +53,7 @@ $userPostCount = User::where('id', $userId)->withCount('posts')->first()
 
             <!-- Edit button -->
             <a href="{{ route('profile.edit') }}" class="bg-blue-500 px-2 py-1 
-                        text-white font-semibold text-sm rounded block text-center 
+                        text-white font-semibold text-sm rounded text-center 
                         sm:inline-block block hover:bg-blue-800">Edit</a>
           </div>
 
@@ -128,13 +129,12 @@ $userPostCount = User::where('id', $userId)->withCount('posts')->first()
         <div class="flex flex-wrap -mx-px md:-mx-3">
 
           <!-- column -->
-          <!-- <div class="w-1/3 p-px md:px-3"> -->
             <!-- post 1-->
             @foreach ($posts as $post)
 
 
-            <div class="max-w-sm m-4">
-              <div class="rounded-2xl shadow-xl bg-white text-gray-700">
+            <div class="w-80 m-4">
+              <div class="rounded-2xl shadow-xl h-fit bg-white text-gray-700">
                 <div class="w-fit rounded overflow-hidden shadow-none">
                   <header class="flex flex-start">
                     <div>
@@ -174,7 +174,7 @@ $userPostCount = User::where('id', $userId)->withCount('posts')->first()
 
                       </div>
                     </header>
-                    <img class="w-full max-w-full min-w-full" src="{{ $post->img_url }}" alt="post">
+                    <img class="h-80 object-cover max-w-full min-w-full" src="{{ $post->img_url }}" alt="post">
 
                     <div class="px-6 pt-4">
                       <div>
@@ -212,11 +212,11 @@ $userPostCount = User::where('id', $userId)->withCount('posts')->first()
             </div>
 
             @endforeach
-          <!-- </div> -->
         </div>
       </div>
   </main>
 </x-guest-layout>
+        </x-app-layout>
 <style>
   .menu-nav {
 
