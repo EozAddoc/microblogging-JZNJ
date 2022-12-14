@@ -6,6 +6,8 @@ use App\Models\Follow;
 $test = $first->user_id;
 $userId = auth()->user()->id;
 $userPostCount = User::where('id', $test)->withCount('posts')->first();
+$count = Follow::where('followed_id', $test)->count();
+$count2 =Follow::where('follower_id', $test)->count();
 $userFollows = Follow::where('follower_id', $userId)->where('followed_id', $test)->first();
 
 ?>
@@ -90,11 +92,11 @@ $userFollows = Follow::where('follower_id', $userId)->where('followed_id', $test
                         </li>
 
                         <li>
-                            <span class="font-semibold">50.5k</span>
+                            <span class="font-semibold">{{$count}}</span>
                             followers
                         </li>
                         <li>
-                            <span class="font-semibold">10</span>
+                            <span class="font-semibold">{{$count2}}</span>
                             following
                         </li>
                     </ul>
