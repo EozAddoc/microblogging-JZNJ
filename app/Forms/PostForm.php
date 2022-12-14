@@ -13,8 +13,8 @@ class PostForm extends Form
             "method"=>"POST",
             "url"=>"/addPost"
         ];
-        $this->add("description")->add("img_url")->add("submit", "submit", [
-            "label"=>"Valider"
-        ]);
+        $this->add("description")
+        ->add("img_url")
+        ->add("submit", "submit", ["label"=>"Valider"]);
     }
 }

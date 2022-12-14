@@ -75,7 +75,8 @@ class PostController extends Controller
         ]);
 
         $posts = Post::all();
-        return view('posts.index', compact('posts'))->with('status', 'post added successfully');
+        // return view('posts.index', compact('posts'))->with('status', 'post added successfully');
+        return view('dashboard', compact('posts'))->with('status', 'post added successfully');
     }
 
     /**

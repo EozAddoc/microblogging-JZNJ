@@ -9,7 +9,7 @@ $userPostCount = User::where('id', $userId)->withCount('posts')->first()
 <x-app-layout>
 <x-guest-layout>
   
-  <main class="bg-gray-50 bg-opacity-25">
+  <main class="bg-gray-50 bg-opacity-25 w-5/6">
 
     <div class="mb-8">
 
@@ -54,7 +54,7 @@ $userPostCount = User::where('id', $userId)->withCount('posts')->first()
             <!-- Edit button -->
             <a href="{{ route('profile.edit') }}" class="bg-blue-500 px-2 py-1 
                         text-white font-semibold text-sm rounded text-center 
-                        sm:inline-block block hover:bg-blue-800">Edit</a>
+                        sm:inline-block block hover:bg-blue-800 w-fit">Edit</a>
           </div>
 
           <!-- post, following, followers list for medium screens -->
@@ -98,7 +98,7 @@ $userPostCount = User::where('id', $userId)->withCount('posts')->first()
         <ul class="flex md:hidden justify-around space-x-8 border-t 
                 text-center p-2 text-gray-600 leading-snug text-sm">
           <li>
-            <span class="font-semibold text-gray-800 block">6</span>
+            <span class="font-semibold text-gray-800 block">{{$userPostCount->posts_count}}</span>
             posts
           </li>
 <!-- 
@@ -216,7 +216,7 @@ $userPostCount = User::where('id', $userId)->withCount('posts')->first()
       </div>
   </main>
 </x-guest-layout>
-        </x-app-layout>
+</x-app-layout>
 <style>
   .menu-nav {
 

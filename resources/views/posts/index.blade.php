@@ -22,7 +22,7 @@ use app\Models\User;
                         if ($post->user->id === auth()->user()->id) {
                             $route = "/profilePage";
                         } else {
-                            $route = "/allposts/" . strval($post->user->id);
+                            $route = "/user/" . strval($post->user->id);
                         }
                         ?>
                         <a href={{$route}} class="cursor-pointer m-4 flex items-center text-sm outline-none focus:outline-none focus:border-gray-300 transition duration-150 ease-in-out">
@@ -59,7 +59,7 @@ use app\Models\User;
 if ($post->user->id === auth()->user()->id) {
     $route = "/profilePage";
 } else {
-    $route = "/allposts/" . strval($post->user->id);
+    $route = "/user/" . strval($post->user->id);
 }
 ?>
 <a href={{$route}} class="cursor-pointer m-4 flex items-center text-sm outline-none focus:outline-none focus:border-gray-300 transition duration-150 ease-in-out">

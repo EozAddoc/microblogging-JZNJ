@@ -40,7 +40,7 @@ Route::post('addPost', [PostController::class, 'store']);
 Route::get('updatePost/{post}', [PostController::class, 'updateForm'])->name('updatePost.updateForm');
 Route::post('updatePost/{post}', [PostController::class, 'update'])->name('updatePost.update');
 
-Route::get('allposts/{id}', function ($id) {
+Route::get('user/{id}', function ($id) {
     $posts = App\Models\Post::all()->where('user_id', $id);
     $first = Post::all()->where('user_id', $id)->first();
     return view('profile.otherUserProfile', compact('posts', 'first'));
