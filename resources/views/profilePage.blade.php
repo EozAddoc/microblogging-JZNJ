@@ -179,14 +179,18 @@ $userPostCount = User::where('id', $userId)->withCount('posts')->first()
                     <div class="px-6 pt-4">
                       <div>
                         <div class="flex items-center">
-                          <span class="mb-2 mr-2 inline-flex items-center cursor-pointer">
-                            <svg class="text-gray-700 mr-1 inline-block h-7 w-7" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                            </svg>
-                            <span class="text-md mt-1 font-black text-gray-700">
-                              I like it!
-                            </span>
-                          </span>
+                        <form method="post" action="{{route('like.likePost',$post->id)}}" enctype="multipart/form-data" accept-charset="UTF-8">
+                        {{ csrf_field()}}
+                        <button type="submit"> <svg class="heart text-gray-700 mr-1 inline-block h-7 w-7  " xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                            </svg></button>
+                        <input type="hidden" name="post_id" value="{{ $post->id }}" />
+
+                        <span class="text-md mt-1 font-black text-gray-700">
+                            I like it!
+                        </span>
+                    </form>
+
 
                         </div>
                       </div>
@@ -235,7 +239,11 @@ $userPostCount = User::where('id', $userId)->withCount('posts')->first()
     font-size: 20px;
   }
 
-
+  .heart:hover {
+  /* Scale up the heart */
+  transform: scale(1.5);
+  /* Change the background color to a lighter red */
+}
 
   .dropdown {
     outline: none;

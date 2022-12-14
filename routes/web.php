@@ -8,6 +8,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\LikeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -57,5 +58,6 @@ Route::delete('profilePage/{post}', [PostController::class, 'destroy'])->name('p
 Route::get('Comment/{postid}', [CommentController::class,'store'])->name('addComment.store');
 Route::post('Comment/{postid}', [CommentController::class, 'store'])->name('addComment.store');
 
+Route::post('/dashboard',[PostController::class, 'likePost'] )->name('dashboard.likePost');
 
 require __DIR__ . '/auth.php';
