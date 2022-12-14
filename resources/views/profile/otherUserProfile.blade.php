@@ -2,6 +2,8 @@
 
 use app\Models\User;
 use App\Models\Follow;
+use App\Models\Like;
+
 
 $test = $first->user_id;
 $userId = auth()->user()->id;
@@ -159,7 +161,11 @@ $userFollows = Follow::where('follower_id', $userId)->where('followed_id', $test
                     <div class="w-1/3 p-px md:px-3">
                         <!-- post 1-->
                         @foreach ($posts as $post)
+                        <?php
+            $postid= $post->id;
+            $likes = Like::where('post_id',$postid)->count();
 
+            ?>
                         <div class="max-w-sm m-4">
                             <div class="rounded-2xl shadow-xl bg-white text-gray-700">
                                 <div class="w-fit rounded overflow-hidden shadow-none">
@@ -199,10 +205,9 @@ $userFollows = Follow::where('follower_id', $userId)->where('followed_id', $test
                                                                 </svg>
 
                                                             </button>
+                                                            {{$likes}}
 
-                                                            <span class="text-md mt-1 font-black text-gray-700">
-                                                                I like it!
-                                                            </span>
+                                                            
                                                         </form>
                                                     </span>
 

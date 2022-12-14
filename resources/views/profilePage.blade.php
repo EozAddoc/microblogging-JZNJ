@@ -2,6 +2,7 @@
 
 use app\Models\User;
 use App\Models\Follow;
+use App\Models\Like;
 
 
 $userId = auth()->user()->id;
@@ -144,7 +145,12 @@ $count2 = Follow::where('follower_id', $userId)->count();
             <!-- post 1-->
             @foreach ($posts as $post)
 
+            <?php
+            $postid= $post->id;
+            $likes = Like::where('post_id',$postid)->count();
 
+            ?>
+          
             <div class="w-80 m-4">
               <div class="rounded-2xl shadow-xl h-fit bg-white text-gray-700">
                 <div class="w-fit rounded overflow-hidden shadow-none">
@@ -159,26 +165,26 @@ $count2 = Follow::where('follower_id', $userId)->count();
                         </div>
                       </a>
                     </div>
+                    <div class="menu-nav mr-2">
+                      <div class="dropdown-container" tabindex="-1">
+                        <div class="three-dots"></div>
+                        <div class="dropdown">
+
+                          <form method="POST" action="{{route('profilePage.destroy',$post->id )}}" onsubmit="return confirm('Are you sure?');">
+                            @csrf
+                            @method('Delete')
+                            <button class="text-red-400 hover:text-red-600" type="submit">Delete</button>
+                          </form>
+
+
+                          <a class="text-blue-400 hover:text-blue-600" href="{{route('updatePost.updateForm',$post->id )}}" type="submit">Modify</a>
+
+                        </div>
+                      </div>
+                    </div>
 
                   </header>
                   <!-- inside card -->
-                  <div class="menu-nav">
-                    <div class="dropdown-container" tabindex="-1">
-                      <div class="three-dots"></div>
-                      <div class="dropdown">
-
-                        <form method="POST" action="{{route('profilePage.destroy',$post->id )}}" onsubmit="return confirm('Are you sure?');">
-                          @csrf
-                          @method('Delete')
-                          <button class="text-red-400 hover:text-red-600" type="submit">Delete</button>
-                        </form>
-
-
-                        <a class="text-blue-400 hover:text-blue-600" href="{{route('updatePost.updateForm',$post->id )}}" type="submit">Modify</a>
-
-                      </div>
-                    </div>
-                  </div>
 
                   <div class="w-fit rounded overflow-hidden shadow-none">
                     <header class="flex flex-start">
@@ -196,11 +202,10 @@ $count2 = Follow::where('follower_id', $userId)->count();
                             <button type="submit"> <svg class="heart text-gray-700 mr-1 inline-block h-7 w-7  " xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                               </svg></button>
+                              {{$likes}}
                             <input type="hidden" name="post_id" value="{{ $post->id }}" />
 
-                            <span class="text-md mt-1 font-black text-gray-700">
-                              I like it!
-                            </span>
+                           
                           </form>
 
 

@@ -431,8 +431,8 @@
             <div class="flex justify-center pt-8 sm:justify-start sm:pt-0">
                 <div>
                     <img src="meerkat.gif">
-                    <span class="text-9xl text-gray-900 dark:text-gray-500 font-black">Suri'</span>
-                    <span class="text-9xl text-yellow font-black">chat</span>
+                    <span class="text-9xl text-gray-900 dark:text-gray-500 font-black">SURI'</span>
+                    <span class="text-9xl text-yellow font-black">CHAT</span>
                     <span class="text-sm ml-2 text-gray-500 font-black">Microblogging</span>
                     <!-- <svg viewBox="0 0 651 192" fill="none" xmlns="http://www.w3.org/2000/svg" class="h-16 w-auto text-gray-700 sm:h-20">
                         <g clip-path="url(#clip0)" fill="#EF3B2D"> -->
