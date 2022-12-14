@@ -53,6 +53,8 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(User::class, 'follows', 'followed_user_id', 'user_id');
     }
+
+
     /**
      * The attributes that should be cast.
      *

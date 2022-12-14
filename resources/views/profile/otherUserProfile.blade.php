@@ -1,10 +1,13 @@
 <?php
 
 use app\Models\User;
+use App\Models\Follow;
 
 $test = $first->user_id;
 $userId = auth()->user()->id;
-$userPostCount = User::where('id', $test)->withCount('posts')->first()
+$userPostCount = User::where('id', $test)->withCount('posts')->first();
+$userFollows = Follow::where('follower_id', $userId)->where('followed_id', $test)->first();
+
 ?>
 <x-guest-layout>
 
@@ -17,11 +20,13 @@ $userPostCount = User::where('id', $test)->withCount('posts')->first()
                     .pb-full {
                         padding-bottom: 100%;
                     }
+
                     .heart:hover {
-  /* Scale up the heart */
-  transform: scale(1.5);
-  /* Change the background color to a lighter red */
-}
+                        /* Scale up the heart */
+                        transform: scale(1.5);
+                        /* Change the background color to a lighter red */
+                    }
+
                     .bioclass {
                         color: #8E8E8E;
                     }
@@ -49,6 +54,7 @@ $userPostCount = User::where('id', $test)->withCount('posts')->first()
                     <div class="md:flex md:flex-wrap md:items-center mb-4">
                         <h2 class="text-3xl inline-block font-light md:mr-2 mb-2 sm:mb-0">
                             {{$userPostCount->name}}
+
                         </h2>
 
                         <!-- badge -->
@@ -59,9 +65,21 @@ $userPostCount = User::where('id', $test)->withCount('posts')->first()
                         </span>
 
                         <!-- Edit button -->
-                        <a href="#" class="bg-blue-500 px-2 py-1 
+                        <form method="post" action="{{route('allposts.follow')}}" enctype="multipart/form-data" accept-charset="UTF-8">
+                            {{ csrf_field()}}
+                            <input type="hidden" name="followz" value="{{ $userPostCount->id }}" />
+
+                            <button class="bg-blue-500 px-2 py-1 
                         text-white font-semibold text-sm rounded block text-center 
-                        sm:inline-block block hover:bg-blue-800">Follow</a>
+                        sm:inline-block block hover:bg-blue-800" type="submit" <?php if ($userFollows != null) {
+                                                                                    echo 'style="display: none;"';
+                                                                                } ?>>Follow</button>
+                            <button class="bg-blue-500 px-2 py-1 
+                        text-white font-semibold text-sm rounded block text-center 
+                        sm:inline-block block hover:bg-blue-800"  <?php if ($userFollows == null) {
+                                                                                    echo 'style="display: none;"';
+                                                                                } ?>>Following</button>
+                        </form>
                     </div>
 
                     <!-- post, following, followers list for medium screens -->
@@ -157,7 +175,7 @@ $userPostCount = User::where('id', $test)->withCount('posts')->first()
 
                                     </header>
                                     <!-- inside card -->
-                                   
+
                                     <div class="w-fit rounded overflow-hidden shadow-none">
                                         <header class="flex flex-start">
                                             <div>
@@ -170,16 +188,19 @@ $userPostCount = User::where('id', $test)->withCount('posts')->first()
                                             <div>
                                                 <div class="flex items-center">
                                                     <span class="mb-2 mr-2 inline-flex items-center cursor-pointer">
-                                                       <form  method="post" action="{{route('dashboard.likePost')}}"  enctype="multipart/form-data" accept-charset="UTF-8"> 
-                                                       {{ csrf_field()}}
-                                                       <button type="submit"> <svg class="heart text-gray-700 mr-1 inline-block h-7 w-7 " xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                                                        </svg></button>
-                                                        <input type="hidden" name="post_id" value="{{ $post->id }}" />
+                                                        <form method="post" action="{{route('dashboard.likePost')}}" enctype="multipart/form-data" accept-charset="UTF-8">
+                                                            {{ csrf_field()}}
+                                                            <input type="hidden" name="post_id" value="{{ $post->id }}" />
 
-                                                        <span class="text-md mt-1 font-black text-gray-700">
-                                                        I like it!
-                                                        </span>
+                                                            <button type="submit"> <svg class="heart text-gray-700 mr-1 inline-block h-7 w-7 " xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                                                                </svg>
+
+                                                            </button>
+
+                                                            <span class="text-md mt-1 font-black text-gray-700">
+                                                                I like it!
+                                                            </span>
                                                         </form>
                                                     </span>
 

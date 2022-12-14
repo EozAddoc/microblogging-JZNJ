@@ -59,5 +59,6 @@ Route::get('Comment/{postid}', [CommentController::class,'store'])->name('addCom
 Route::post('Comment/{postid}', [CommentController::class, 'store'])->name('addComment.store');
 
 Route::post('/dashboard',[PostController::class, 'likePost'] )->name('dashboard.likePost');
+Route::post('/allposts',[ProfileController::class, 'follow'] )->name('allposts.follow');
 
 require __DIR__ . '/auth.php';
