@@ -44,7 +44,15 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
+    public function following()
+    {
+        return $this->belongsToMany(User::class, 'follows', 'user_id', 'followed_user_id');
+    }
 
+    public function followers()
+    {
+        return $this->belongsToMany(User::class, 'follows', 'followed_user_id', 'user_id');
+    }
     /**
      * The attributes that should be cast.
      *

@@ -58,12 +58,12 @@ use PhpParser\Node\Stmt\Foreach_;
 
                                     <div class="modal-body">
                                         <div class="firstFlex">
-                                            <img class="w-full max-w-full min-w-full" src="{{ $post->img_url }}" alt="post">
+                                            <img class="w-half max-w-half min-w-half" src="{{ $post->img_url }}" alt="post">
                                         </div>
                                         <div class="commentSection">
 
                                             <div class="header">
-                                                <img src="{{$userImg->img}}" class="h-7 w-7 rounded-full object-cover float-left mr-2" alt="usuario" />
+                                                <img src="{{$userImg->img}}" class="h-6 w-6 rounded-full object-cover float-left mr-2" alt="usuario" />
 
                                                 <p class="text-md mt-1 font-black text-gray-700">{{$post->user->name}}</p>
                                             </div>
@@ -75,9 +75,10 @@ use PhpParser\Node\Stmt\Foreach_;
                                             ?>
 
                                                 <p class="description mb-10">
-                                                    <img src="{{$userCo->img}}" class="h-7 w-7 rounded-full object-cover float-left mr-2 " alt="usuario" />
+                                                    <img src="{{$userCo->img}}" class="h-6 w-6 rounded-full object-cover float-left  " alt="usuario" />
                                                     <span> {{$userCo->name}} </span> {{$p->body}}
                                                 </p>
+                                                <br>
 
                                             <?php
                                             endforeach;
@@ -214,7 +215,7 @@ use PhpParser\Node\Stmt\Foreach_;
     }
 
     .modal-body img {
-        height: 100%
+        height: 100%;
     }
 
 
