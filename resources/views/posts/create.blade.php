@@ -6,5 +6,9 @@
     <input type="text" name="img_url">
     <button type="submit">Add</button>
     </form> -->
-    {!! form($form) !!}
+    <div class="display flex justify-center mt-10">
+        <div>
+            {!! form($form) !!}
+        </div>
+</div>
 </x-app-layout>
