@@ -27,7 +27,7 @@ class LikeController extends Controller
     {
         
         $user=auth()->user()->id;
-
+var_dump($id);
         $check = Like::where('user_id', $user)->where('post_id', $id)->first();
         if ($check) {
             // The user has already liked the item, so return an error
