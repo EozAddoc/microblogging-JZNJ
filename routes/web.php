@@ -3,10 +3,11 @@
 use Illuminate\Support\Facades\DB;
 
 use App\Models\Post;
+use App\Models\Comment;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
-use App\Http\Controllers\PostsController;
+use App\Http\Controllers\CommentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,7 +26,9 @@ Route::get('/', function () {
 
 Route::get('/dashboard', function () {
     $posts = Post::all();
-    return view('dashboard', compact('posts'));
+    $comments = Comment::all();
+
+    return view('dashboard', compact('posts','comments'));
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
@@ -49,5 +52,10 @@ Route::get('allposts/{id}', function ($id) {
 Route::get('/profilePage', [PostController::class, 'userPosts'])->name('profilePage.userPosts');
 Route::patch('/profilePage', [PostController::class, 'update'])->name('profilePage.update');
 Route::delete('profilePage/{post}', [PostController::class, 'destroy'])->name('profilePage.destroy');
+
+
+Route::get('Comment/{postid}', [CommentController::class,'store'])->name('addComment.store');
+Route::post('Comment/{postid}', [CommentController::class, 'store'])->name('addComment.store');
+
 
 require __DIR__ . '/auth.php';
