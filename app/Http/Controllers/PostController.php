@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Like;
+use Illuminate\Support\Facades\URL;
+
 use Illuminate\Support\Facades\DB;
 use Kris\LaravelFormBuilder\FormBuilder;
 use App\Models\Post;
+use App\Models\Comment;
 use Illuminate\Http\Request;
 use App\Repositories\PostRepository;
 use Carbon\Carbon;
@@ -77,6 +81,31 @@ class PostController extends Controller
         $posts = Post::all();
         // return view('posts.index', compact('posts'))->with('status', 'post added successfully');
         return view('dashboard', compact('posts'))->with('status', 'post added successfully');
+    }
+    public function likePost(Request $request)
+    {
+        $like = new Like;
+        $like->user_id = auth()->user()->id;
+        $like->post_id = $request->post_id;
+        $like->save();
+        $user = auth()->user()->id;
+
+        // $check = Like::where('user_id', $user)->where('post_id', $id)->first();
+        // if ($check) {
+        //     // The user has already liked the item, so return an error
+        //     return response()->json([
+        //         'error' => 'You have already liked this item.'
+        //     ], 400);
+        // } else {
+        //     $like = new Like;
+        //     $like->user_id = auth()->user()->id;
+        //     $like->post_id = $id;
+        //     $like->save();
+        //     return response()->json([
+        //         'success' => 'Like added successfully.'
+        //     ]);
+        // }
+    return redirect()->back();
     }
 
     /**

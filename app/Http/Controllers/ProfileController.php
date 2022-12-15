@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\Follow;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
@@ -10,7 +11,14 @@ use Illuminate\Support\Facades\Redirect;
 class ProfileController extends Controller
 {
 
+    public function follow(REQUEST $request){
+        $follow = new Follow();
+        $follow->follower_id = auth()->user()->id;
+        $follow->followed_id = $request->followz;
+        $follow->save();
+        return redirect()->back();
 
+    }
     public function watch(){
         return view('profilePage');
     }

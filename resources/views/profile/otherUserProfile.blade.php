@@ -1,10 +1,17 @@
 <?php
 
 use app\Models\User;
+use App\Models\Follow;
+use App\Models\Like;
+
 
 $test = $first->user_id;
 $userId = auth()->user()->id;
-$userPostCount = User::where('id', $test)->withCount('posts')->first()
+$userPostCount = User::where('id', $test)->withCount('posts')->first();
+$count = Follow::where('followed_id', $test)->count();
+$count2 =Follow::where('follower_id', $test)->count();
+$userFollows = Follow::where('follower_id', $userId)->where('followed_id', $test)->first();
+
 ?>
 <x-app-layout>
     <x-guest-layout>
@@ -17,6 +24,12 @@ $userPostCount = User::where('id', $test)->withCount('posts')->first()
                     <style>
                     .pb-full {
                         padding-bottom: 100%;
+                    }
+
+                    .heart:hover {
+                        /* Scale up the heart */
+                        transform: scale(1.5);
+                        /* Change the background color to a lighter red */
                     }
 
                     .bioclass {
@@ -33,11 +46,53 @@ $userPostCount = User::where('id', $test)->withCount('posts')->first()
                             display: block;
                         }
                     }
+<<<<<<< HEAD
                     </style>
                     <div class="md:mr-16">
                         <!-- profile image -->
                         <img class="w-20 h-20 md:w-40 md:h-40 object-cover rounded-full border-2 border-pink-600 p-1"
                             src="{{$userPostCount->img}}" alt="profile">
+=======
+                </style>
+
+                <div class="md:w-3/12 md:ml-16">
+                    <!-- profile image -->
+                    <img class="w-20 h-20 md:w-40 md:h-40 object-cover rounded-full
+                     border-2 border-pink-600 p-1" src="{{$userPostCount->img}}" alt="profile">
+                </div>
+
+                <!-- profile meta -->
+                <div class="w-8/12 md:w-7/12 ml-4">
+                    <div class="md:flex md:flex-wrap md:items-center mb-4">
+                        <h2 class="text-3xl inline-block font-light md:mr-2 mb-2 sm:mb-0">
+                            {{$userPostCount->name}}
+
+                        </h2>
+
+                        <!-- badge -->
+                        <span class="inline-block fas fa-certificate fa-lg text-blue-500 
+                               relative mr-6  text-xl transform -translate-y-2" aria-hidden="true">
+                            <i class="fas fa-check text-white text-xs absolute inset-x-0
+                               ml-1 mt-px"></i>
+                        </span>
+
+                        <!-- Edit button -->
+                        <form method="post" action="{{route('allposts.follow')}}" enctype="multipart/form-data" accept-charset="UTF-8">
+                            {{ csrf_field()}}
+                            <input type="hidden" name="followz" value="{{ $userPostCount->id }}" />
+
+                            <button class="bg-blue-500 px-2 py-1 
+                        text-white font-semibold text-sm rounded block text-center 
+                        sm:inline-block block hover:bg-blue-800" type="submit" <?php if ($userFollows != null) {
+                                                                                    echo 'style="display: none;"';
+                                                                                } ?>>Follow</button>
+                            <button class="bg-blue-500 px-2 py-1 
+                        text-white font-semibold text-sm rounded block text-center 
+                        sm:inline-block block hover:bg-blue-800"  <?php if ($userFollows == null) {
+                                                                                    echo 'style="display: none;"';
+                                                                                } ?>>Following</button>
+                        </form>
+>>>>>>> main
                     </div>
 
                     <!-- profile meta -->
@@ -47,6 +102,7 @@ $userPostCount = User::where('id', $test)->withCount('posts')->first()
                                 {{$userPostCount->name}}
                             </span>
 
+<<<<<<< HEAD
                             <!-- badge -->
                             <span
                                 class="inline-block fas fa-certificate fa-lg text-blue-500 relative mr-6  text-xl transform -translate-y-2"
@@ -87,6 +143,19 @@ $userPostCount = User::where('id', $test)->withCount('posts')->first()
 
                     <!-- user meta form small screens -->
                     <div class="md:hidden text-sm my-2">
+=======
+                        <li>
+                            <span class="font-semibold">{{$count}}</span>
+                            followers
+                        </li>
+                        <li>
+                            <span class="font-semibold">{{$count2}}</span>
+                            following
+                        </li>
+                    </ul>
+                    <!-- user meta form medium screens -->
+                    <div class="hidden md:block">
+>>>>>>> main
                         <h1 class="font-semibold">{{$userPostCount->username}}</h1>
                         <span class="bioclass">{{$userPostCount->website}}</span>
                         <p>{{$userPostCount->bio}}</p>
@@ -134,10 +203,19 @@ $userPostCount = User::where('id', $test)->withCount('posts')->first()
                         <!-- column -->
                         <!-- post 1-->
                         @foreach ($posts as $post)
+                        <?php
+            $postid= $post->id;
+            $likes = Like::where('post_id',$postid)->count();
 
+<<<<<<< HEAD
 
                         <div class="w-96 md:w-80 m-4">
                             <div class="rounded-2xl shadow-xl h-fit bg-white text-gray-700">
+=======
+            ?>
+                        <div class="max-w-sm m-4">
+                            <div class="rounded-2xl shadow-xl bg-white text-gray-700">
+>>>>>>> main
                                 <div class="w-fit rounded overflow-hidden shadow-none">
                                     <header class="flex flex-start">
                                         <div>
@@ -170,6 +248,7 @@ $userPostCount = User::where('id', $test)->withCount('posts')->first()
                                             <div>
                                                 <div class="flex items-center">
                                                     <span class="mb-2 mr-2 inline-flex items-center cursor-pointer">
+<<<<<<< HEAD
                                                         <svg class="text-gray-700 mr-1 inline-block h-7 w-7"
                                                             xmlns="http://www.w3.org/2000/svg" fill="none"
                                                             viewBox="0 0 24 24" stroke="currentColor">
@@ -180,6 +259,21 @@ $userPostCount = User::where('id', $test)->withCount('posts')->first()
                                                         <span class="text-md mt-1 font-black text-gray-700">
                                                             I like it!
                                                         </span>
+=======
+                                                        <form method="post" action="{{route('dashboard.likePost')}}" enctype="multipart/form-data" accept-charset="UTF-8">
+                                                            {{ csrf_field()}}
+                                                            <input type="hidden" name="post_id" value="{{ $post->id }}" />
+
+                                                            <button type="submit"> <svg class="heart text-gray-700 mr-1 inline-block h-7 w-7 " xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                                                                </svg>
+
+                                                            </button>
+                                                            {{$likes}}
+
+                                                            
+                                                        </form>
+>>>>>>> main
                                                     </span>
 
                                                 </div>

@@ -4,6 +4,6 @@
         <label for="postItem">Update Post</label><br>
         <input type="text" name="description" placeholder="{{old('description', $posts->description)}}">
         <input type="text" name="img_url" placeholder="{{old('img_url', $posts->img_url)}}">
-        <button stype="submit">Update</button>
+        <button type="submit">Update</button>
     </form>
 </x-app-layout>
