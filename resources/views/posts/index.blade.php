@@ -6,10 +6,10 @@ use app\Models\User;
 
 ?>
 <x-guest-layout>
-<main class="w-5/6 flex flex-row flex-wrap">
+<main class="w-5/6 flex flex-row justify-center flex-wrap">
     @foreach ($posts as $post)
 
-    <div class="w-80 m-4">
+    <div class="w-96 md:w-80 m-4">
         <!-- <div class="rounded-2xl shadow-xl bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300"> -->
         <div class="rounded-2xl shadow-xl h-fit bg-white text-gray-700">
             <!-- inside card -->
@@ -48,7 +48,7 @@ use app\Models\User;
 
                 <!-- clickable picture -->
                 <a class="button" href="#{{ $post->id }}">
-                    <img class="h-80 object-cover max-w-full min-w-full" src="{{ $post->img_url }}" alt="post">
+                    <img class="h-96 md:h-80 object-cover max-w-full min-w-full" src="{{ $post->img_url }}" alt="post">
                 </a>
 
                 <!-- Modal when clicked -->

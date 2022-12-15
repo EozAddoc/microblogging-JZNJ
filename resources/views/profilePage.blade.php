@@ -126,14 +126,14 @@ $userPostCount = User::where('id', $userId)->withCount('posts')->first()
           </li>
         </ul>
         <!-- flexbox grid -->
-        <div class="flex flex-wrap -mx-px md:-mx-3">
+        <div class="flex flex-wrap justify-center -mx-px md:-mx-3">
 
           <!-- column -->
             <!-- post 1-->
             @foreach ($posts as $post)
 
 
-            <div class="w-80 m-4">
+            <div class="w-96 md:w-80 m-4">
               <div class="rounded-2xl shadow-xl h-fit bg-white text-gray-700">
                 <div class="w-fit rounded overflow-hidden shadow-none">
                   <header class="flex flex-start">
@@ -174,7 +174,7 @@ $userPostCount = User::where('id', $userId)->withCount('posts')->first()
 
                       </div>
                     </header>
-                    <img class="h-80 object-cover max-w-full min-w-full" src="{{ $post->img_url }}" alt="post">
+                    <img class="h-96 md:h-80 object-cover max-w-full min-w-full" src="{{ $post->img_url }}" alt="post">
 
                     <div class="px-6 pt-4">
                       <div>
