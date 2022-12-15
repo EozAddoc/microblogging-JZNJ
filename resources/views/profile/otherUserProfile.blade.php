@@ -13,14 +13,15 @@ $count2 = Follow::where('follower_id', $test)->count();
 $userFollows = Follow::where('follower_id', $userId)->where('followed_id', $test)->first();
 
 ?>
-<x-guest-layout>
+<x-app-layout>
+    <x-guest-layout>
 
-    <main class="bg-gray-100 bg-opacity-25">
+        <main class="bg-gray-50 bg-opacity-25 w-5/6">
 
-        <div class="lg:w-8/12 lg:mx-auto mb-8">
+            <div class="mb-8">
 
-            <header class="flex flex-wrap items-center p-4 md:py-8">
-                <style>
+                <header class="flex flex-wrap items-center justify-center p-4 md:py-8">
+                    <style>
                     .pb-full {
                         padding-bottom: 100%;
                     }
@@ -47,14 +48,14 @@ $userFollows = Follow::where('follower_id', $userId)->where('followed_id', $test
                     }
                 </style>
 
-                <div class="md:w-3/12 md:ml-16">
+                <div class="md:mr-10">
                     <!-- profile image -->
                     <img class="w-20 h-20 md:w-40 md:h-40 object-cover rounded-full
                      border-2 border-pink-600 p-1" src="{{$userPostCount->img}}" alt="profile">
                 </div>
 
                 <!-- profile meta -->
-                <div class="w-8/12 md:w-7/12 ml-4">
+                <div class="w-8/12 md:w-4/12 ml-4">
                     <div class="md:flex md:flex-wrap md:items-center mb-4">
                         <h2 class="text-3xl inline-block font-light md:mr-2 mb-2 sm:mb-0">
                             {{$userPostCount->name}}
@@ -91,14 +92,13 @@ $userFollows = Follow::where('follower_id', $userId)->where('followed_id', $test
                         </form>
                     </div>
 
-                    <!-- post, following, followers list for medium screens -->
-                    <ul class="hidden md:flex space-x-8 mb-4">
-                        <li>
-                            <span class="font-semibold">{{$userPostCount->posts_count}}</span>
-                            posts
-                        </li>
-
-                        <li>
+                        <!-- post, following, followers list for medium screens -->
+                        <ul class="hidden md:flex space-x-8 mb-4">
+                            <li>
+                                <span class="font-semibold">{{$userPostCount->posts_count}}</span>
+                                posts
+                            </li>
+                            <li>
                             <span class="font-semibold">{{$count}}</span>
                             followers
                         </li>
@@ -106,7 +106,8 @@ $userFollows = Follow::where('follower_id', $userId)->where('followed_id', $test
                             <span class="font-semibold">{{$count2}}</span>
                             following
                         </li>
-                    </ul>
+                        </ul>
+
                     <!-- user meta form medium screens -->
                     <div class="hidden md:block">
                         <h1 class="font-semibold">{{$userPostCount->username}}</h1>
@@ -114,74 +115,67 @@ $userFollows = Follow::where('follower_id', $userId)->where('followed_id', $test
                         <p>{{$userPostCount->bio}}</p>
                     </div>
 
-                </div>
+                </header>
 
-                <!-- user meta form small screens -->
-                <div class="md:hidden text-sm my-2">
-                    <h1 class="font-semibold">{{$userPostCount->username}}</h1>
-                    <span class="bioclass">{{$userPostCount->website}}</span>
-                    <p>{{$userPostCount->bio}}</p>
-                </div>
+                <!-- posts -->
+                <div class="px-px md:px-3">
 
-            </header>
-
-            <!-- posts -->
-            <div class="px-px md:px-3">
-
-                <!-- user following for mobile only -->
-                <ul class="flex md:hidden justify-around space-x-8 border-t 
+                    <!-- user following for mobile only -->
+                    <ul class="flex md:hidden justify-around space-x-8 border-t 
                 text-center p-2 text-gray-600 leading-snug text-sm">
-                    <li>
-                        <span class="font-semibold text-gray-800 block">6</span>
-                        posts
-                    </li>
-
-                    <li>
-                        <span class="font-semibold text-gray-800 block">50.5k</span>
-                        followers
-                    </li>
-                    <li>
-                        <span class="font-semibold text-gray-800 block">10</span>
-                        following
-                    </li>
-                </ul>
-                <br>
-                <br>
-                <!-- insta freatures -->
-                <ul class="flex items-center justify-around md:justify-center space-x-12  
+                        <li>
+                            <span class="font-semibold text-gray-800 block">{{$userPostCount->posts_count}}</span>
+                            posts
+                        </li>
+                        <!-- 
+          <li>
+            <span class="font-semibold text-gray-800 block">50.5k</span>
+            followers
+          </li>
+          <li>
+            <span class="font-semibold text-gray-800 block">10</span>
+            following
+          </li> -->
+                    </ul>
+                    <br>
+                    <br>
+                    <!-- insta freatures -->
+                    <ul class="flex items-center justify-around md:justify-center space-x-12  
                     uppercase tracking-widest font-semibold text-xs text-gray-600
                     border-t">
-                    <!-- posts tab is active -->
-                    <li class="md:border-t md:border-gray-700 md:-mt-px md:text-gray-700">
-                        <a class="inline-block p-3" href="#">
-                            <i class="fas fa-th-large text-xl md:text-xs"></i>
-                            <span class="hidden md:inline">posts</span>
-                        </a>
-                    </li>
-                </ul>
-                <!-- flexbox grid -->
-                <div class="flex flex-wrap -mx-px md:-mx-3">
+                        <!-- posts tab is active -->
+                        <li class="md:border-t md:border-gray-700 md:-mt-px md:text-gray-700">
+                            <a class="inline-block p-3" href="#">
+                                <i class="fas fa-th-large text-xl md:text-xs"></i>
+                                <span class="hidden md:inline">posts</span>
+                            </a>
+                        </li>
+                    </ul>
+                    <!-- flexbox grid -->
+                    <div class="flex flex-wrap justify-center -mx-px md:-mx-3">
 
-                    <!-- column -->
-                    <div class="w-1/3 p-px md:px-3">
+                        <!-- column -->
                         <!-- post 1-->
                         @foreach ($posts as $post)
                         <?php
-                        $postid = $post->id;
-                        $likes = Like::where('post_id', $postid)->count();
+            $postid= $post->id;
+            $likes = Like::where('post_id',$postid)->count();
+            ?>
 
-                        ?>
-                        <div class="max-w-sm m-4">
-                            <div class="rounded-2xl shadow-xl bg-white text-gray-700">
+                        <div class="w-96 md:w-80 m-4">
+                            <div class="rounded-2xl shadow-xl h-fit bg-white text-gray-700">
                                 <div class="w-fit rounded overflow-hidden shadow-none">
                                     <header class="flex flex-start">
                                         <div>
-                                            <a href="#" class="cursor-pointer m-4 flex items-center text-sm outline-none focus:outline-none focus:border-gray-300 transition duration-150 ease-in-out">
+                                            <a href="#"
+                                                class="cursor-pointer m-4 flex items-center text-sm outline-none focus:outline-none focus:border-gray-300 transition duration-150 ease-in-out">
 
-                                                <img src="{{$userPostCount->img}}" class="h-9 w-9 rounded-full object-cover" alt="usuario" />
+                                                <img src="{{$userPostCount->img}}"
+                                                    class="h-9 w-9 rounded-full object-cover" alt="usuario" />
                                                 <div>
                                                     <p class="block ml-2 text-sm font-bold">{{$userPostCount->name}}</p>
-                                                    <span class="block ml-2 text-xs text-gray-600">Published on {{$userPostCount->created_at}}</span>
+                                                    <span class="block ml-2 text-xs text-gray-600">Published on {{$post->created_at->format('jS \of F Y')}} at {{$post->created_at->format('h:i A')}}</span>
+                                
                                                 </div>
                                             </a>
                                         </div>
@@ -195,7 +189,8 @@ $userFollows = Follow::where('follower_id', $userId)->where('followed_id', $test
 
                                             </div>
                                         </header>
-                                        <img class="w-full max-w-full min-w-full" src="{{ $post->img_url }}" alt="post">
+                                        <img class="h-96 md:h-80 object-cover max-w-full min-w-full" src="{{ $post->img_url }}"
+                                            alt="post">
 
                                         <div class="px-6 pt-4">
                                             <div>
@@ -222,7 +217,7 @@ $userFollows = Follow::where('follower_id', $userId)->where('followed_id', $test
                                             <div class="mb-6">
                                                 <div class="text-sm flex flex-start items-center">
 
-                                                    <p class="font-bold ml-2">
+                                                    <p class="font-bold mt-1">
                                                         <a class="cursor-pointer">{{$userPostCount->name}}:</a>
                                                         <span class="text-gray-500 font-medium ml-1">
                                                             {{$post->description}}
@@ -239,10 +234,9 @@ $userFollows = Follow::where('follower_id', $userId)->where('followed_id', $test
                             </div>
                         </div>
 
-
                         @endforeach
                     </div>
                 </div>
-            </div>
-    </main>
-</x-guest-layout>
+        </main>
+    </x-guest-layout>
+</x-app-layout>

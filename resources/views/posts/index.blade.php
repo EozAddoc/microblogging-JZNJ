@@ -8,6 +8,7 @@ use PhpParser\Node\Stmt\Foreach_;
 
 ?>
 <x-guest-layout>
+<main class="w-5/6 flex flex-row justify-center flex-wrap">
     @foreach ($posts as $post)
     <?php
             $postid= $post->id;
@@ -15,11 +16,11 @@ use PhpParser\Node\Stmt\Foreach_;
 
             ?>
 
-    <div class="max-w-sm m-4">
+    <div>
 
-        <div class="w-80 m-4">
+    <div class="mb-8">
             <!-- <div class="rounded-2xl shadow-xl bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300"> -->
-            <div class="rounded-2xl shadow-xl h-fit bg-white text-gray-700">
+            <div class=" w-96 md:w-80 m-4 rounded-2xl shadow-xl h-fit bg-white text-gray-700">
                 <!-- inside card -->
                 <div class="w-fit rounded overflow-hidden shadow-none">
 
@@ -31,7 +32,7 @@ use PhpParser\Node\Stmt\Foreach_;
                             if ($post->user->id === auth()->user()->id) {
                                 $route = "/profilePage";
                             } else {
-                                $route = "/allposts/" . strval($post->user->id);
+                                $route = "user/" . strval($post->user->id);
                             }
                             ?>
                             <a href={{$route}} class="cursor-pointer m-4 flex items-center text-sm outline-none focus:outline-none focus:border-gray-300 transition duration-150 ease-in-out">
@@ -53,7 +54,7 @@ use PhpParser\Node\Stmt\Foreach_;
 
                     <!-- clickable picture -->
                     <a class="button" href="#{{ $post->id }}">
-                        <img class="h-80 object-cover max-w-full min-w-full" src="{{ $post->img_url }}" alt="post">
+                        <img class="h-96 md:h-80 object-cover" src="{{ $post->img_url }}" alt="post">
                     </a>
 
                     <!-- Modal when clicked -->
@@ -110,7 +111,7 @@ use PhpParser\Node\Stmt\Foreach_;
                                         if ($post->user->id === auth()->user()->id) {
                                             $route = "/profilePage";
                                         } else {
-                                            $route = "/allposts/" . strval($post->user->id);
+                                            $route = "/user/" . strval($post->user->id);
                                         }
                                         ?>
                                         <a href={{$route}} class="cursor-pointer m-4 flex items-center text-sm outline-none focus:outline-none focus:border-gray-300 transition duration-150 ease-in-out">
@@ -157,7 +158,7 @@ use PhpParser\Node\Stmt\Foreach_;
             <div class="mb-6">
                 <div class="text-sm flex flex-start items-center">
 
-                    <p class="font-bold ml-2">
+                    <p class="font-bold mt-1 mb-6">
                         <a class="cursor-pointer">{{$post->user->name}}:</a>
                         <span class="text-gray-500 font-medium ml-1">
                             {{$post->description}}
