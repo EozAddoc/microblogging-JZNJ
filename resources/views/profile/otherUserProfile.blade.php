@@ -47,7 +47,13 @@ $userFollows = Follow::where('follower_id', $userId)->where('followed_id', $test
                             }
                         }
                     </style>
-
+                    @if (session('message'))
+                    <div class="alert alert-success">
+                        <script>
+                            alert("Already liked")
+                        </script>
+                    </div>
+                    @endif
                     <div class="md:mr-10">
                         <!-- profile image -->
                         <img class="w-20 h-20 md:w-40 md:h-40 object-cover rounded-full
@@ -99,13 +105,19 @@ $userFollows = Follow::where('follower_id', $userId)->where('followed_id', $test
                                 posts
                             </li>
                             <li>
-                                <span class="font-semibold">{{$count}}</span>
-                                followers
+                                <form method="get" action="{{route('followers.viewfollowers')}}" enctype="multipart/form-data" accept-charset="UTF-8">
+                                    <input type="hidden" name="user_id" value="{{ $userPostCount->id }}" />
+                                    <input type="hidden" name="user" value="{{ $first->user_id }}" />
+                                    <span class="font-semibold">{{$count}}</span> <button type="submit">followers</button>
+                                </form>
                             </li>
                             <li>
-                                <span class="font-semibold">{{$count2}}</span>
-                                following
-                            </li>
+                                <form method="get" action="{{route('followed.viewFollowedBy')}}" enctype="multipart/form-data" accept-charset="UTF-8">
+                                    <input type="hidden" name="user_id" value="{{ $userPostCount->id }}" />
+                                    <input type="hidden" name="user" value="{{ $first->user_id }}" />
+
+                                    <span class="font-semibold">{{$count2}}</span> <button type="submit">following</button>
+                                </form>
                         </ul>
 
                         <!-- user meta form medium screens -->

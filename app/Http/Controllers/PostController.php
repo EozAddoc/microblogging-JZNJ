@@ -31,7 +31,8 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::all();
+        $reverseposts = Post::all();
+        $posts =$reverseposts->reverse();
 
         return view('posts.index', compact('posts'));
     }

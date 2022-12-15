@@ -36,34 +36,56 @@ class ProfileController extends Controller
         return redirect()->back();
     }
 
-    public function viewfollowers(REQUEST $request){
+    public function viewfollowers(REQUEST $request)
+    {
         $currentUser = auth()->user()->id;
+        $otherUser = $request->user;
+        if ($currentUser == $otherUser) {
+            // Query the follows table to get the records where the followed_id matches the current user's id
+            $getFollow = DB::table('follows')->where('followed_id', $currentUser)->get();
 
-    // Query the follows table to get the records where the followed_id matches the current user's id
-    $getFollow = DB::table('follows')->where('followed_id', $currentUser)->get();
+            // Use the pluck method to get the values of the id column from the results
+            $followers = $getFollow->pluck('follower_id');
 
-    // Use the pluck method to get the values of the id column from the results
-    $followers = $getFollow->pluck('follower_id');
+            // Query the users table, filtering the results by the id column and using the collection of follower ids as the criteria
+            $users = DB::table('users')->whereIn('id', $followers)->get();
+        } else {
+            // Query the follows table to get the records where the followed_id matches the current user's id
+            $getFollow = DB::table('follows')->where('followed_id', $otherUser)->get();
 
-    // Query the users table, filtering the results by the id column and using the collection of follower ids as the criteria
-    $users = DB::table('users')->whereIn('id', $followers)->get();
-    return view('profile.users', compact('users'));
+            // Use the pluck method to get the values of the id column from the results
+            $followers = $getFollow->pluck('follower_id');
 
+            // Query the users table, filtering the results by the id column and using the collection of follower ids as the criteria
+            $users = DB::table('users')->whereIn('id', $followers)->get();
+        }
 
+        return view('profile.users', compact('users'));
     }
-    public function viewFollowedBy(){
+    public function viewFollowedBy(REQUEST $request)
+    {
         $currentUser = auth()->user()->id;
+        $otherUser = $request->user;
+        if ($currentUser == $otherUser) {
+            // Query the follows table to get the records where the followed_id matches the current user's id
+            $getFollow = DB::table('follows')->where('follower_id', $currentUser)->get();
 
-    // Query the follows table to get the records where the followed_id matches the current user's id
-    $getFollow = DB::table('follows')->where('follower_id', $currentUser)->get();
+            // Use the pluck method to get the values of the id column from the results
+            $followers = $getFollow->pluck('followed_id');
 
-    // Use the pluck method to get the values of the id column from the results
-    $followers = $getFollow->pluck('followed_id');
+            // Query the users table, filtering the results by the id column and using the collection of follower ids as the criteria
+            $users = DB::table('users')->whereIn('id', $followers)->get();
+        } else {
+            // Query the follows table to get the records where the followed_id matches the current user's id
+            $getFollow = DB::table('follows')->where('follower_id', $otherUser)->get();
 
-    // Query the users table, filtering the results by the id column and using the collection of follower ids as the criteria
-    $users = DB::table('users')->whereIn('id', $followers)->get();
-    return view('profile.users', compact('users'));
-        
+            // Use the pluck method to get the values of the id column from the results
+            $followers = $getFollow->pluck('followed_id');
+
+            // Query the users table, filtering the results by the id column and using the collection of follower ids as the criteria
+            $users = DB::table('users')->whereIn('id', $followers)->get();
+        }
+        return view('profile.users', compact('users'));
     }
     public function watch()
     {

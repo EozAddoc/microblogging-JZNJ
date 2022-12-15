@@ -69,25 +69,27 @@ $count2 = Follow::where('follower_id', $userId)->count();
                 posts
               </li>
               <li>
-               
+
                 <form method="get" action="{{route('followers.viewfollowers')}}" enctype="multipart/form-data" accept-charset="UTF-8">
-                <input type="hidden" name="user_id" value="{{ $userPostCount->id }}" />
-                <span class="font-semibold">{{$count}}</span>   <button type="submit">followers</button>
-              </form>
+                  <input type="hidden" name="user_id" value="{{ $userPostCount->id }}" />
+                  <input type="hidden" name="user" value="{{ $userPostCount->id }}" />
+                  <span class="font-semibold">{{$count}}</span> <button type="submit">followers</button>
+                </form>
               </li>
               <li>
-              <form method="get" action="{{route('followed.viewFollowedBy')}}" enctype="multipart/form-data" accept-charset="UTF-8">
-                <input type="hidden" name="user_id" value="{{ $userPostCount->id }}" />
-                <span class="font-semibold">{{$count2}}</span>   <button type="submit">following</button>
-              </form>
+                <form method="get" action="{{route('followed.viewFollowedBy')}}" enctype="multipart/form-data" accept-charset="UTF-8">
+                  <input type="hidden" name="user_id" value="{{ $userPostCount->id }}" />
+                  <input type="hidden" name="user" value="{{ $userPostCount->id }}" />
+                  <span class="font-semibold">{{$count2}}</span> <button type="submit">following</button>
+                </form>
               </li>
               @if (session('message'))
-    <div class="alert alert-success">
-      <script>
-       alert("Already liked")
-       </script>
-    </div>
-@endif
+              <div class="alert alert-success">
+                <script>
+                  alert("Already liked")
+                </script>
+              </div>
+              @endif
               <!-- <li>
               <span class="font-semibold">50.5k</span>
               followers
