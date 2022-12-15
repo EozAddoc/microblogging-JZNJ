@@ -69,12 +69,17 @@ $count2 = Follow::where('follower_id', $userId)->count();
                 posts
               </li>
               <li>
-                <span class="font-semibold">{{$count}}</span>
-                followers
+               
+                <form method="get" action="{{route('followers.viewfollowers')}}" enctype="multipart/form-data" accept-charset="UTF-8">
+                <input type="hidden" name="user_id" value="{{ $userPostCount->id }}" />
+                <span class="font-semibold">{{$count}}</span>   <button type="submit">followers</button>
+              </form>
               </li>
               <li>
-                <span class="font-semibold">{{$count2}}</span>
-                following
+              <form method="get" action="{{route('followed.viewFollowedBy')}}" enctype="multipart/form-data" accept-charset="UTF-8">
+                <input type="hidden" name="user_id" value="{{ $userPostCount->id }}" />
+                <span class="font-semibold">{{$count2}}</span>   <button type="submit">following</button>
+              </form>
               </li>
 
               <!-- <li>

@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
 use App\Models\Follow;
+use Illuminate\Support\Facades\DB;
+
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
@@ -31,6 +34,36 @@ class ProfileController extends Controller
             ->delete();
 
         return redirect()->back();
+    }
+
+    public function viewfollowers(REQUEST $request){
+        $currentUser = auth()->user()->id;
+
+    // Query the follows table to get the records where the followed_id matches the current user's id
+    $getFollow = DB::table('follows')->where('followed_id', $currentUser)->get();
+
+    // Use the pluck method to get the values of the id column from the results
+    $followers = $getFollow->pluck('follower_id');
+
+    // Query the users table, filtering the results by the id column and using the collection of follower ids as the criteria
+    $users = DB::table('users')->whereIn('id', $followers)->get();
+    return view('profile.users', compact('users'));
+
+
+    }
+    public function viewFollowedBy(){
+        $currentUser = auth()->user()->id;
+
+    // Query the follows table to get the records where the followed_id matches the current user's id
+    $getFollow = DB::table('follows')->where('follower_id', $currentUser)->get();
+
+    // Use the pluck method to get the values of the id column from the results
+    $followers = $getFollow->pluck('followed_id');
+
+    // Query the users table, filtering the results by the id column and using the collection of follower ids as the criteria
+    $users = DB::table('users')->whereIn('id', $followers)->get();
+    return view('profile.users', compact('users'));
+        
     }
     public function watch()
     {

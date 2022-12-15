@@ -31,16 +31,24 @@ Route::get('/dashboard', function () {
 
     return view('dashboard', compact('posts','comments'));
 })->middleware(['auth', 'verified'])->name('dashboard');
+Route::post('/dashboard',[PostController::class, 'likePost'] )->name('dashboard.likePost');
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profil e', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
 Route::resource('posts', PostController::class);
+
 Route::get('/allposts', [PostController::class, 'index'])->name('allposts.index');
+Route::post('/allposts',[ProfileController::class, 'follow'] )->name('allposts.follow');
+
+
 Route::get('/addPost', [PostController::class, 'create'])->name('insertPost.create');
 Route::post('addPost', [PostController::class, 'store']);
+
 Route::get('updatePost/{post}', [PostController::class, 'updateForm'])->name('updatePost.updateForm');
 Route::post('updatePost/{post}', [PostController::class, 'update'])->name('updatePost.update');
 
@@ -58,8 +66,10 @@ Route::delete('profilePage/{post}', [PostController::class, 'destroy'])->name('p
 Route::get('Comment/{postid}', [CommentController::class,'store'])->name('addComment.store');
 Route::post('Comment/{postid}', [CommentController::class, 'store'])->name('addComment.store');
 
-Route::post('/dashboard',[PostController::class, 'likePost'] )->name('dashboard.likePost');
-Route::post('/allposts',[ProfileController::class, 'follow'] )->name('allposts.follow');
 Route::post('/all',[ProfileController::class, 'unfollow'] )->name('allposts.unfollow');
+
 Route::get('/users',[PostController::class,'search'] )->name('users.search');
+
+Route::get('/followers',[ProfileController::class,'viewfollowers'] )->name('followers.viewfollowers');
+Route::get('/followed',[ProfileController::class,'viewFollowedBy'] )->name('followed.viewFollowedBy');
 require __DIR__ . '/auth.php';
