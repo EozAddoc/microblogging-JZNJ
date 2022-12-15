@@ -21,8 +21,8 @@
                         sm:inline-block block hover:bg-blue-800">Go</button> -->
                     
                     <div class="relative w-full">
-            <input type="text" id="search-dropdown" name="query" class="block p-2 w-fit z-20 text-sm text-gray-300 bg-white rounded-r-lg border-l-gray-50 border-l-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 " placeholder="Search for users..." required>
-            <button type="submit" class="absolute top-0 right-0 p-2 text-sm font-medium text-white bg-gray-300 rounded-r-lg border border-gray-300 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-blue-300">
+            <input type="text" id="search-dropdown" name="query" class="block p-2 w-fit z-20 text-sm text-gray-300 bg-white rounded-r-lg border-l-gray-50 border-l-2 border border-gray-300 focus:ring-gray-400 focus:border-gray-400 " placeholder="Search for users..." required>
+            <button type="submit" class="absolute top-0 right-0 p-2 text-sm font-medium text-white bg-gray-300 rounded-r-lg border border-gray-300 hover:bg-gray-600 hover:border-gray-600 focus:ring-4 focus:outline-none focus:ring-gray-400 focus:border-gray-400">
                 <svg aria-hidden="true" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
                 <span class="sr-only">Search</span>
             </button>
