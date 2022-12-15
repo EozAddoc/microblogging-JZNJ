@@ -39,7 +39,7 @@ $count2 = Follow::where('follower_id', $userId)->count();
                         }
                     }
                     </style>
-                    <div class="md:mr-16">
+                    <div class="md:mr-10">
                         <!-- profile image -->
                         <img class="w-20 h-20 md:w-40 md:h-40 object-cover rounded-full border-2 border-pink-600 p-1"
                             src="{{$userPostCount->img}}" alt="profile">
@@ -165,8 +165,8 @@ $count2 = Follow::where('follower_id', $userId)->count();
                                                     class="h-9 w-9 rounded-full object-cover" alt="usuario" />
                                                 <div>
                                                     <p class="block ml-2 text-sm font-bold">{{$userPostCount->name}}</p>
-                                                    <span class="block ml-2 text-xs text-gray-600">Published on
-                                                        {{$userPostCount->created_at}}</span>
+                                                    <span class="block ml-2 text-xs text-gray-600">Published on {{$userPostCount->created_at->format('jS \of F Y')}} at {{$userPostCount->created_at->format('h:i A')}}</span>
+                                
                                                 </div>
                                             </a>
                                         </div>
@@ -232,7 +232,7 @@ $count2 = Follow::where('follower_id', $userId)->count();
                                             <div class="mb-6">
                                                 <div class="text-sm flex flex-start items-center">
 
-                                                    <p class="font-bold ml-2">
+                                                    <p class="font-bold mt-1">
                                                         <a class="cursor-pointer">{{$userPostCount->name}}:</a>
                                                         <span class="text-gray-500 font-medium ml-1">
                                                             {{$post->description}}
@@ -270,7 +270,7 @@ $count2 = Follow::where('follower_id', $userId)->count();
 .three-dots:after {
     cursor: pointer;
     color: #444;
-    content: '\2807';
+    content: '\205D';
     font-size: 20px;
 }
 

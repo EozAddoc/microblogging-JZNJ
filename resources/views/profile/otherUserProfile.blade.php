@@ -46,23 +46,16 @@ $userFollows = Follow::where('follower_id', $userId)->where('followed_id', $test
                             display: block;
                         }
                     }
-<<<<<<< HEAD
-                    </style>
-                    <div class="md:mr-16">
-                        <!-- profile image -->
-                        <img class="w-20 h-20 md:w-40 md:h-40 object-cover rounded-full border-2 border-pink-600 p-1"
-                            src="{{$userPostCount->img}}" alt="profile">
-=======
                 </style>
 
-                <div class="md:w-3/12 md:ml-16">
+                <div class="md:mr-10">
                     <!-- profile image -->
                     <img class="w-20 h-20 md:w-40 md:h-40 object-cover rounded-full
                      border-2 border-pink-600 p-1" src="{{$userPostCount->img}}" alt="profile">
                 </div>
 
                 <!-- profile meta -->
-                <div class="w-8/12 md:w-7/12 ml-4">
+                <div class="w-8/12 md:w-4/12 ml-4">
                     <div class="md:flex md:flex-wrap md:items-center mb-4">
                         <h2 class="text-3xl inline-block font-light md:mr-2 mb-2 sm:mb-0">
                             {{$userPostCount->name}}
@@ -92,29 +85,7 @@ $userFollows = Follow::where('follower_id', $userId)->where('followed_id', $test
                                                                                     echo 'style="display: none;"';
                                                                                 } ?>>Following</button>
                         </form>
->>>>>>> main
                     </div>
-
-                    <!-- profile meta -->
-                    <div class="w-8/12 md:w-4/12 ml-4">
-                        <div class="md:flex md:flex-wrap md:items-center mb-4">
-                            <span class="text-3xl inline-block font-light md:mr-2 mb-2 sm:mb-0">
-                                {{$userPostCount->name}}
-                            </span>
-
-<<<<<<< HEAD
-                            <!-- badge -->
-                            <span
-                                class="inline-block fas fa-certificate fa-lg text-blue-500 relative mr-6  text-xl transform -translate-y-2"
-                                aria-hidden="true">
-                                <i class="fas fa-check text-white text-xs absolute inset-x-0 ml-1 mt-px"></i>
-                            </span>
-
-                            <!-- Edit button -->
-                            <a href="#" class="bg-blue-500 px-2 py-1 
-                        text-white font-semibold text-sm rounded block text-center 
-                        sm:inline-block hover:bg-blue-800 w-fit">Follow</a>
-                        </div>
 
                         <!-- post, following, followers list for medium screens -->
                         <ul class="hidden md:flex space-x-8 mb-4">
@@ -122,29 +93,7 @@ $userFollows = Follow::where('follower_id', $userId)->where('followed_id', $test
                                 <span class="font-semibold">{{$userPostCount->posts_count}}</span>
                                 posts
                             </li>
-
-                            <!-- <li>
-              <span class="font-semibold">50.5k</span>
-              followers
-            </li>
-            <li>
-              <span class="font-semibold">10</span>
-              following
-            </li> -->
-                        </ul>
-                        <!-- user meta form medium screens -->
-                        <div class="hidden md:block">
-                            <h1 class="font-semibold">{{$userPostCount->username}}</h1>
-                            <span class="bioclass">{{$userPostCount->website}}</span>
-                            <p>{{$userPostCount->bio}}</p>
-                        </div>
-
-                    </div>
-
-                    <!-- user meta form small screens -->
-                    <div class="md:hidden text-sm my-2">
-=======
-                        <li>
+                            <li>
                             <span class="font-semibold">{{$count}}</span>
                             followers
                         </li>
@@ -152,10 +101,10 @@ $userFollows = Follow::where('follower_id', $userId)->where('followed_id', $test
                             <span class="font-semibold">{{$count2}}</span>
                             following
                         </li>
-                    </ul>
+                        </ul>
+
                     <!-- user meta form medium screens -->
                     <div class="hidden md:block">
->>>>>>> main
                         <h1 class="font-semibold">{{$userPostCount->username}}</h1>
                         <span class="bioclass">{{$userPostCount->website}}</span>
                         <p>{{$userPostCount->bio}}</p>
@@ -206,16 +155,10 @@ $userFollows = Follow::where('follower_id', $userId)->where('followed_id', $test
                         <?php
             $postid= $post->id;
             $likes = Like::where('post_id',$postid)->count();
-
-<<<<<<< HEAD
+            ?>
 
                         <div class="w-96 md:w-80 m-4">
                             <div class="rounded-2xl shadow-xl h-fit bg-white text-gray-700">
-=======
-            ?>
-                        <div class="max-w-sm m-4">
-                            <div class="rounded-2xl shadow-xl bg-white text-gray-700">
->>>>>>> main
                                 <div class="w-fit rounded overflow-hidden shadow-none">
                                     <header class="flex flex-start">
                                         <div>
@@ -226,8 +169,8 @@ $userFollows = Follow::where('follower_id', $userId)->where('followed_id', $test
                                                     class="h-9 w-9 rounded-full object-cover" alt="usuario" />
                                                 <div>
                                                     <p class="block ml-2 text-sm font-bold">{{$userPostCount->name}}</p>
-                                                    <span class="block ml-2 text-xs text-gray-600">Published on
-                                                        {{$userPostCount->created_at}}</span>
+                                                    <span class="block ml-2 text-xs text-gray-600">Published on {{$post->created_at->format('jS \of F Y')}} at {{$post->created_at->format('h:i A')}}</span>
+                                
                                                 </div>
                                             </a>
                                         </div>
@@ -248,18 +191,6 @@ $userFollows = Follow::where('follower_id', $userId)->where('followed_id', $test
                                             <div>
                                                 <div class="flex items-center">
                                                     <span class="mb-2 mr-2 inline-flex items-center cursor-pointer">
-<<<<<<< HEAD
-                                                        <svg class="text-gray-700 mr-1 inline-block h-7 w-7"
-                                                            xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                            viewBox="0 0 24 24" stroke="currentColor">
-                                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                                stroke-width="2"
-                                                                d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                                                        </svg>
-                                                        <span class="text-md mt-1 font-black text-gray-700">
-                                                            I like it!
-                                                        </span>
-=======
                                                         <form method="post" action="{{route('dashboard.likePost')}}" enctype="multipart/form-data" accept-charset="UTF-8">
                                                             {{ csrf_field()}}
                                                             <input type="hidden" name="post_id" value="{{ $post->id }}" />
@@ -273,7 +204,6 @@ $userFollows = Follow::where('follower_id', $userId)->where('followed_id', $test
 
                                                             
                                                         </form>
->>>>>>> main
                                                     </span>
 
                                                 </div>
@@ -282,7 +212,7 @@ $userFollows = Follow::where('follower_id', $userId)->where('followed_id', $test
                                             <div class="mb-6">
                                                 <div class="text-sm flex flex-start items-center">
 
-                                                    <p class="font-bold ml-2">
+                                                    <p class="font-bold mt-1">
                                                         <a class="cursor-pointer">{{$userPostCount->name}}:</a>
                                                         <span class="text-gray-500 font-medium ml-1">
                                                             {{$post->description}}

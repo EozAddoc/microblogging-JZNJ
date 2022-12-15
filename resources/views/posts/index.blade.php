@@ -15,51 +15,50 @@ use PhpParser\Node\Stmt\Foreach_;
             $likes = Like::where('post_id',$postid)->count();
 
             ?>
-        <div class="w-96 md:w-80 m-4">
 
-        <!-- <div class="rounded-2xl shadow-xl bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300"> -->
-        <div class="rounded-2xl shadow-xl h-fit bg-white text-gray-700">
-            <!-- inside card -->
-            <div class="w-fit rounded overflow-hidden shadow-none">
+    <div>
+
+    <div class="mb-8">
+            <!-- <div class="rounded-2xl shadow-xl bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300"> -->
+            <div class=" w-96 md:w-80 m-4 rounded-2xl shadow-xl h-fit bg-white text-gray-700">
+                <!-- inside card -->
+                <div class="w-fit rounded overflow-hidden shadow-none">
 
 
-                <header class="flex flex-start">
-                    <div>
+                    <header class="flex flex-start">
+                        <div>
 
-                        <?php
-                        if ($post->user->id === auth()->user()->id) {
-                            $route = "/profilePage";
-                        } else {
-                            $route = "/user/" . strval($post->user->id);
-                        }
-                        ?>
-                        <a href={{$route}}
-                            class="cursor-pointer m-4 flex items-center text-sm outline-none focus:outline-none focus:border-gray-300 transition duration-150 ease-in-out">
                             <?php
-                            $userId = $post->user->id;
-                            $user = User::where('id', $userId);
-                            $userImg = User::where('id', $userId)->withCount('posts')->first();
-
+                            if ($post->user->id === auth()->user()->id) {
+                                $route = "/profilePage";
+                            } else {
+                                $route = "user/" . strval($post->user->id);
+                            }
                             ?>
-                            <img src="{{$userImg->img}}" class="h-9 w-9 rounded-full object-cover" alt="usuario" />
-                            <div>
-                                <p class="block ml-2 text-lg font-bold">{{$post->user->name}}</p>
-                                <span class="block ml-2 text-xs text-gray-600">Published on
-                                    {{$post->created_at->format('jS \of F Y')}} at
-                                    {{$post->created_at->format('h:i A')}}</span>
-                            </div>
-                        </a>
-                    </div>
+                            <a href={{$route}} class="cursor-pointer m-4 flex items-center text-sm outline-none focus:outline-none focus:border-gray-300 transition duration-150 ease-in-out">
+                                <?php
+                                $userId = $post->user->id;
+                                $user = User::where('id', $userId);
+                                $userImg = User::where('id', $userId)->withCount('posts')->first();
 
-                </header>
+                                ?>
+                                <img src="{{$userImg->img}}" class="h-9 w-9 rounded-full object-cover" alt="usuario" />
+                                <div>
+                                    <p class="block ml-2 text-lg font-bold">{{$post->user->name}}</p>
+                                    <span class="block ml-2 text-xs text-gray-600">Published on {{$post->created_at->format('jS \of F Y')}} at {{$post->created_at->format('h:i A')}}</span>
+                                </div>
+                            </a>
+                        </div>
 
-                <!-- clickable picture -->
-                <a class="button" href="#{{ $post->id }}">
-                    <img class="h-96 md:h-80 object-cover max-w-full min-w-full" src="{{ $post->img_url }}" alt="post">
-                </a>
+                    </header>
 
-                 <!-- Modal when clicked -->
-                 <div id="{{ $post->id }}" class="overlay">
+                    <!-- clickable picture -->
+                    <a class="button" href="#{{ $post->id }}">
+                        <img class="h-96 md:h-80 object-cover" src="{{ $post->img_url }}" alt="post">
+                    </a>
+
+                    <!-- Modal when clicked -->
+                    <div id="{{ $post->id }}" class="overlay">
                         <div class="popup">
                             <div class="modal-dialog">
                                 <div class="modal-content">
@@ -107,23 +106,28 @@ use PhpParser\Node\Stmt\Foreach_;
                                             </form>
                                         </div>
 
+
                                         <?php
-if ($post->user->id === auth()->user()->id) {
-    $route = "/profilePage";
-} else {
-    $route = "/user/" . strval($post->user->id);
-}
-?>
-                                        <a href={{$route}}
-                                            class="cursor-pointer m-4 flex items-center text-sm outline-none focus:outline-none focus:border-gray-300 transition duration-150 ease-in-out">
+                                        if ($post->user->id === auth()->user()->id) {
+                                            $route = "/profilePage";
+                                        } else {
+                                            $route = "/user/" . strval($post->user->id);
+                                        }
+                                        ?>
+                                        <a href={{$route}} class="cursor-pointer m-4 flex items-center text-sm outline-none focus:outline-none focus:border-gray-300 transition duration-150 ease-in-out">
                                             <?php
-    $userId = $post->user->id;
-    $user = User::where('id', $userId);
-    $userImg = User::where('id', $userId)->withCount('posts')->first();
+                                            $userId = $post->user->id;
+                                            $user = User::where('id', $userId);
+                                            $userImg = User::where('id', $userId)->withCount('posts')->first();
 
-    ?>
+                                            ?>
 
-<div class="modal-footer">
+                                        </a>
+                                    </div>
+                                </div>
+
+
+                                <div class="modal-footer">
                                     <a class="close btn btn-default" href="#">x</a>
                                 </div>
                             </div>
@@ -137,19 +141,7 @@ if ($post->user->id === auth()->user()->id) {
         <div class="px-6 pt-4">
             <div>
 
-            <div class="flex items-center">
-                            <span class="mb-2 mr-2 inline-flex items-center cursor-pointer">
-                                <svg class="text-gray-700 mr-1 inline-block h-7 w-7" xmlns="http://www.w3.org/2000/svg"
-                                    fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                                </svg>
-                                <span class="text-md mt-1 font-black text-gray-700">
-                                    I like it!
-                                </span>
-                            </span>
-
-                            <div class="flex items-center">
+                <div class="flex items-center">
                     <form method="post" action="{{route('dashboard.likePost')}}" enctype="multipart/form-data" accept-charset="UTF-8">
                     {{ csrf_field()}}
                         <button type="submit"> <svg class="heart text-gray-700 mr-1 inline-block h-7 w-7  " xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -166,7 +158,7 @@ if ($post->user->id === auth()->user()->id) {
             <div class="mb-6">
                 <div class="text-sm flex flex-start items-center">
 
-                    <p class="font-bold ml-2">
+                    <p class="font-bold mt-1 mb-6">
                         <a class="cursor-pointer">{{$post->user->name}}:</a>
                         <span class="text-gray-500 font-medium ml-1">
                             {{$post->description}}
@@ -182,7 +174,6 @@ if ($post->user->id === auth()->user()->id) {
     </div>
     </div>
     @endforeach
-</main>
 </x-guest-layout>
 
 <style>
