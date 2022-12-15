@@ -169,6 +169,7 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
+        DB::table('likes')->where('post_id',$post->id)->delete();
         $post->delete();
 
         return back()->with('status', 'item deleted successfully');
