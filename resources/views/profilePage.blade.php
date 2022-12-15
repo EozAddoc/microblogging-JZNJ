@@ -265,6 +265,8 @@ $count2 = Follow::where('follower_id', $userId)->count();
 
   #myTest:hover{
     fill:red;
+    stroke:none;
+
   }
 
   .three-dots:after {
