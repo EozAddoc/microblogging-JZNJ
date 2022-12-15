@@ -97,27 +97,23 @@ class PostController extends Controller
     }
     public function likePost(Request $request)
     {
-        $like = new Like;
-        $like->user_id = auth()->user()->id;
-        $like->post_id = $request->post_id;
-        $like->save();
-        $user = auth()->user()->id;
+        // $like = new Like;
+        // $like->user_id = auth()->user()->id;
+        // $like->post_id = $request->post_id;
+        // $like->save();
+        // $user = auth()->user()->id;
 
-        // $check = Like::where('user_id', $user)->where('post_id', $id)->first();
-        // if ($check) {
-        //     // The user has already liked the item, so return an error
-        //     return response()->json([
-        //         'error' => 'You have already liked this item.'
-        //     ], 400);
-        // } else {
-        //     $like = new Like;
-        //     $like->user_id = auth()->user()->id;
-        //     $like->post_id = $id;
-        //     $like->save();
-        //     return response()->json([
-        //         'success' => 'Like added successfully.'
-        //     ]);
-        // }
+        $check = Like::where('user_id', auth()->user()->id)->where('post_id', $request->post_id)->first();
+        if ($check) {
+            // The user has already liked the item, so return an error
+            
+        } else {
+            $like = new Like;
+            $like->user_id = auth()->user()->id;
+            $like->post_id = $request->post_id;
+            $like->save();
+           
+        }
         return redirect()->back();
     }
 
