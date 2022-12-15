@@ -6,9 +6,9 @@ use App\Models\Follow;
 ?>
 <x-app-layout>
     <!-- This is an example component -->
-    <div class="max-w-xl mx-auto">
+    <div class="flex mt-8 justify-center">
 
-        <div class="p-8 max-w-md bg-white rounded-lg border shadow-md sm:p-8 ">
+        <div class="p-8 w-96 h-fit bg-white rounded-lg border shadow-md sm:p-8 ">
             <div class="flex justify-between items-center mb-4">
                 <h3 class="text-xl font-bold leading-none text-gray-900 ">Users</h3>
 

@@ -73,6 +73,8 @@ use PhpParser\Node\Stmt\Foreach_;
                                                     <img src="{{$userImg->img}}" class="h-6 w-6 rounded-full object-cover float-left mr-2" alt="usuario" />
 
                                                     <p class="text-md mt-1 font-black text-gray-700">{{$post->user->name}}</p>
+                                                    <p class="text-md mt-1 text-gray-500 font-medium ">{{$post->description}}</p>
+
                                                 </div>
                                                 <?php
                                                 //var_dump($post->comments()->first());
@@ -81,8 +83,8 @@ use PhpParser\Node\Stmt\Foreach_;
                                                     $userCo = User::where('id', $p->user_id)->first();
                                                 ?>
 
-                                                    <p class="description mb-10">
-                                                        <img src="{{$userCo->img}}" class="h-6 w-6 rounded-full object-cover float-left  " alt="usuario" />
+                                                    <p class="description mb-10 mt-4">
+                                                        <img src="{{$userCo->img}}" class="h-6 w-6 rounded-full mr-2 object-cover float-left  " alt="usuario" />
                                                         <span> {{$userCo->name}} </span> {{$p->body}}
                                                     </p>
                                                     <br>
@@ -95,13 +97,13 @@ use PhpParser\Node\Stmt\Foreach_;
                                                     {{ csrf_field()}}
                                                     <div class="flex flex-wrap -mx-3 mb-6">
                                                         <div class="w-full md:w-full px-3 mb-2 mt-2">
-                                                            <input class="bg-gray-50 rounded border border-gray-400 leading-normal resize-none w-full h-10 py-2 px-3 font-medium placeholder-gray-700 focus:outline-none focus:bg-white" name="body" id="body" placeholder='Add Comment'></input>
+                                                            <input class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" name="body" id="body" placeholder='Add Comment'></input>
                                                         </div>
                                                         <div class="w-full md:w-full flex items-start md:w-full px-3">
                                                             <div class="flex items-start w-1/2 text-gray-700 px-2 mr-auto">
                                                             </div>
 
-                                                            <button type='submit' class="text-blue-400 hover:text-blue-600 font-medium">Post</button>
+                                                            <button type='submit' class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">Post</button>
 
                                                 </form>
                                             </div>
@@ -231,7 +233,7 @@ use PhpParser\Node\Stmt\Foreach_;
 
 
     .description {
-        margin: 10px 0;
+        margin-left: 15px;
         font-size: 14px;
         line-height: 20px;
         margin-bottom: 10px;
