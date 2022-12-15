@@ -1,66 +1,63 @@
+<?php
+
+use App\Models\Follow;
+
+
+?>
 <x-app-layout>
-<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
-<div class="container">
-<div class="row">
-	<div class="col-lg-12">
-		<div class="main-box clearfix">
-			<div class="table-responsive">
-				<table class="table user-list">
-					<thead>
-						<tr>
-							<th><span>User</span></th>
-							<th><span>Created</span></th>
-							<th class="text-center"><span>Status</span></th>
-							<th><span>Email</span></th>
-							<th>&nbsp;</th>
-						</tr>
-					</thead>
-					<tbody>
+    <!-- This is an example component -->
+    <div class="max-w-xl mx-auto">
+
+        <div class="p-8 max-w-md bg-white rounded-lg border shadow-md sm:p-8 ">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-xl font-bold leading-none text-gray-900 ">Latest Customers</h3>
+
+            </div>
+            <div class="flow-root">
+                <ul role="list" class="divide-y divide-gray-200">
                     @foreach ($users as $user)
+                    <li class="py-3 sm:py-4">
+                        <div class="flex items-center space-x-4">
+                            <div class="flex-shrink-0">
+                                <img class="w-8 h-8 rounded-full" src="{{$user->img}}" alt="Neil image">
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <?php
+                                if ($user->id === auth()->user()->id) {
+                                    $route = "/profilePage";
+                                } else {
+                                    $route = "user/" . strval($user->id);
+                                }
 
-						<tr>
-							<td>
-								<img src="{{$user->img}}" alt="">
-								<a href="#" class="user-link">{{$user->name}}</a>
-							</td>
-							<td>
-								{{$user->created_at}}
-							</td>
-							<td class="text-center">
-								<span class="label label-default">Inactive</span>
-							</td>
-							<td>
-								<a href="#">{{$user->email}}</a>
-							</td>
-							<td style="width: 20%;">
-								<a href="#" class="table-link">
-									<span class="fa-stack">
-										<i class="fa fa-square fa-stack-2x"></i>
-										<i class="fa fa-search-plus fa-stack-1x fa-inverse"></i>
-									</span>
-								</a>
-								<a href="#" class="table-link">
-									<span class="fa-stack">
-										<i class="fa fa-square fa-stack-2x"></i>
-										<i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
-									</span>
-								</a>
-								<a href="#" class="table-link danger">
-									<span class="fa-stack">
-										<i class="fa fa-square fa-stack-2x"></i>
-										<i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
-									</span>
-								</a>
-							</td>
-						</tr>
-                        @endforeach
 
-					</tbody>
-				</table>
-			</div>
-			
-		</div>
-	</div>
-</div>
-</div>
+                                $userId = auth()->user()->id;
+
+                                $userFollows = Follow::where('follower_id', $userId)->where('followed_id', $user->id)->first();
+                                ?>
+                                <p class="text-sm font-medium text-gray-900 truncate ">
+                                    <a href={{$route}}>{{$user->name}}</a>
+                                </p>
+                                <p class="text-sm text-gray-500 truncate ">
+                                    {{$user->email}}
+                                </p>
+                            </div>
+                            <div class="inline-flex items-center text-base font-semibold text-gray-900 ">
+                                <button class="bg-blue-500 px-2 py-1 
+                        text-white font-semibold text-sm rounded block text-center 
+                        sm:inline-block block hover:bg-blue-800" type="submit" <?php if ($userFollows != null) {
+                                                                                    echo 'style="display: none;"';
+                                                                                } ?>>Follow</button>
+                                <button class="bg-blue-500 px-2 py-1 
+                        text-white font-semibold text-sm rounded block text-center 
+                        sm:inline-block block hover:bg-blue-800" <?php if ($userFollows == null) {
+                                                                        echo 'style="display: none;"';
+                                                                    } ?>>Unfollow</button>
+                            </div>
+                            @endforeach
+                        </div>
+                    </li>
+
+                </ul>
+            </div>
+
 </x-app-layout>

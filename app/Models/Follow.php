@@ -10,13 +10,12 @@ class Follow extends Model
     use HasFactory;
 
     public function following()
-{
-    return $this->belongsToMany(User::class, 'follows', 'follower_id', 'followed_id');
-}
+    {
+        return $this->belongsToMany(User::class, 'follows', 'follower_id', 'followed_id');
+    }
 
-public function followers()
-{
-    return $this->belongsToMany(User::class, 'follows', 'followed_id', 'follower_id');
-}
-
+    public function followers()
+    {
+        return $this->belongsToMany(User::class, 'follows', 'followed_id', 'follower_id');
+    }
 }

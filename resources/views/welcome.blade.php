@@ -12,7 +12,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&family=Fredoka+One&display=swap" rel="stylesheet">
-    
+
     <link rel="stylesheet" href="/resources/css/app.css">
 
     <!-- Styles -->
@@ -131,7 +131,8 @@
         }
 
         .text-xl {
-            font-size: 1.25rem; /* 20px */
+            font-size: 1.25rem;
+            /* 20px */
             line-height: 1.75rem;
         }
 
@@ -550,4 +551,4 @@
     </div>
 </body>
 
-</html> 
+</html>
