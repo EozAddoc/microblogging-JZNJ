@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\DB;
 use Kris\LaravelFormBuilder\FormBuilder;
 use App\Models\Post;
+use App\Models\User;
 use App\Models\Comment;
 use Illuminate\Http\Request;
 use App\Repositories\PostRepository;
@@ -40,6 +41,17 @@ class PostController extends Controller
 
         $posts = DB::table('posts')->where('user_id', auth()->id())->get();
         return view('profilePage', compact('posts'));
+    }
+    
+    public function search (Request $request) {
+        $query = $request->input('query');
+
+        $users = DB::table('users')
+            ->where('name', 'like', "%$query%")
+            ->orWhere('username', 'like', "%$query%")
+            ->get();
+  
+        return view('profile.users',compact('users'));
     }
 
     public function findById($toto)

@@ -60,5 +60,6 @@ Route::post('Comment/{postid}', [CommentController::class, 'store'])->name('addC
 
 Route::post('/dashboard',[PostController::class, 'likePost'] )->name('dashboard.likePost');
 Route::post('/allposts',[ProfileController::class, 'follow'] )->name('allposts.follow');
-
+Route::post('/all',[ProfileController::class, 'unfollow'] )->name('allposts.unfollow');
+Route::get('/users',[PostController::class,'search'] )->name('users.search');
 require __DIR__ . '/auth.php';

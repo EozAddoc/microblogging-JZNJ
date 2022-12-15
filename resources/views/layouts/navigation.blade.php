@@ -2,12 +2,18 @@
 <nav x-data="{ open: false }" class="bg-white text-gray-700 border-b border-gray-100">
 <!-- Primary Navigation Menu -->
     <div class="display flex justify-center">
+    <form action="{{route('users.search')}}" method="GET">
+    {{ csrf_field()}}
+    <input type="text" name="query" placeholder="Search for users...">
+    <button type="submit">Search</button>
+</form>
         <div class="flex justify-between h-20 w-4/5">
             <div class="flex">
                 <!-- Logo -->
                 <div class="w-20">
                     <a href="{{ route('dashboard') }}">
                             <x-application-logo/>
+                            
                     </a>
                     
                 </div>

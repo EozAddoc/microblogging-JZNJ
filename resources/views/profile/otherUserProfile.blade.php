@@ -9,7 +9,7 @@ $test = $first->user_id;
 $userId = auth()->user()->id;
 $userPostCount = User::where('id', $test)->withCount('posts')->first();
 $count = Follow::where('followed_id', $test)->count();
-$count2 =Follow::where('follower_id', $test)->count();
+$count2 = Follow::where('follower_id', $test)->count();
 $userFollows = Follow::where('follower_id', $userId)->where('followed_id', $test)->first();
 
 ?>
@@ -78,11 +78,16 @@ $userFollows = Follow::where('follower_id', $userId)->where('followed_id', $test
                         sm:inline-block block hover:bg-blue-800" type="submit" <?php if ($userFollows != null) {
                                                                                     echo 'style="display: none;"';
                                                                                 } ?>>Follow</button>
+                        </form>
+
+                        <form method="post" action="{{route('allposts.unfollow')}}" enctype="multipart/form-data" accept-charset="UTF-8">
+                            {{ csrf_field()}}
+                            <input type="hidden" name="followed" value="{{ $userPostCount->id }}" />
                             <button class="bg-blue-500 px-2 py-1 
                         text-white font-semibold text-sm rounded block text-center 
-                        sm:inline-block block hover:bg-blue-800"  <?php if ($userFollows == null) {
-                                                                                    echo 'style="display: none;"';
-                                                                                } ?>>Following</button>
+                        sm:inline-block block hover:bg-blue-800" <?php if ($userFollows == null) {
+                                                                        echo 'style="display: none;"';
+                                                                    } ?>>Unfollow</button>
                         </form>
                     </div>
 
@@ -162,10 +167,10 @@ $userFollows = Follow::where('follower_id', $userId)->where('followed_id', $test
                         <!-- post 1-->
                         @foreach ($posts as $post)
                         <?php
-            $postid= $post->id;
-            $likes = Like::where('post_id',$postid)->count();
+                        $postid = $post->id;
+                        $likes = Like::where('post_id', $postid)->count();
 
-            ?>
+                        ?>
                         <div class="max-w-sm m-4">
                             <div class="rounded-2xl shadow-xl bg-white text-gray-700">
                                 <div class="w-fit rounded overflow-hidden shadow-none">
@@ -207,7 +212,7 @@ $userFollows = Follow::where('follower_id', $userId)->where('followed_id', $test
                                                             </button>
                                                             {{$likes}}
 
-                                                            
+
                                                         </form>
                                                     </span>
 
