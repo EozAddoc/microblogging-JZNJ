@@ -3,7 +3,7 @@
 use app\Models\User;
 use App\Models\Follow;
 use App\Models\Like;
-
+use Illuminate\Support\Facades\Session;
 
 $userId = auth()->user()->id;
 $user = User::where('id', $userId);
@@ -81,7 +81,13 @@ $count2 = Follow::where('follower_id', $userId)->count();
                 <span class="font-semibold">{{$count2}}</span>   <button type="submit">following</button>
               </form>
               </li>
-
+              @if (session('message'))
+    <div class="alert alert-success">
+      <script>
+       alert("Already liked")
+       </script>
+    </div>
+@endif
               <!-- <li>
               <span class="font-semibold">50.5k</span>
               followers

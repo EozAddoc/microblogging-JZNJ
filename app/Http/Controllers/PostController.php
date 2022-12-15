@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Like;
 use Illuminate\Support\Facades\URL;
-
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
 use Kris\LaravelFormBuilder\FormBuilder;
 use App\Models\Post;
@@ -106,7 +106,8 @@ class PostController extends Controller
         $check = Like::where('user_id', auth()->user()->id)->where('post_id', $request->post_id)->first();
         if ($check) {
             // The user has already liked the item, so return an error
-            
+            Session::flash('message', 'This is an alert message!');
+
         } else {
             $like = new Like;
             $like->user_id = auth()->user()->id;
