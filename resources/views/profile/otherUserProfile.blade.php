@@ -22,75 +22,75 @@ $userFollows = Follow::where('follower_id', $userId)->where('followed_id', $test
 
                 <header class="flex flex-wrap items-center justify-center p-4 md:py-8">
                     <style>
-                    .pb-full {
-                        padding-bottom: 100%;
-                    }
-
-                    .heart:hover {
-                        /* Scale up the heart */
-                        transform: scale(1.5);
-                        /* Change the background color to a lighter red */
-                    }
-
-                    .bioclass {
-                        color: #8E8E8E;
-                    }
-
-                    /* hide search icon on search focus */
-                    .search-bar:focus+.fa-search {
-                        display: none;
-                    }
-
-                    @media screen and (min-width: 768px) {
-                        .post:hover .overlay {
-                            display: block;
+                        .pb-full {
+                            padding-bottom: 100%;
                         }
-                    }
-                </style>
 
-                <div class="md:mr-10">
-                    <!-- profile image -->
-                    <img class="w-20 h-20 md:w-40 md:h-40 object-cover rounded-full
+                        .heart:hover {
+                            /* Scale up the heart */
+                            transform: scale(1.5);
+                            /* Change the background color to a lighter red */
+                        }
+
+                        .bioclass {
+                            color: #8E8E8E;
+                        }
+
+                        /* hide search icon on search focus */
+                        .search-bar:focus+.fa-search {
+                            display: none;
+                        }
+
+                        @media screen and (min-width: 768px) {
+                            .post:hover .overlay {
+                                display: block;
+                            }
+                        }
+                    </style>
+
+                    <div class="md:mr-10">
+                        <!-- profile image -->
+                        <img class="w-20 h-20 md:w-40 md:h-40 object-cover rounded-full
                      border-2 border-pink-600 p-1" src="{{$userPostCount->img}}" alt="profile">
-                </div>
+                    </div>
 
-                <!-- profile meta -->
-                <div class="w-8/12 md:w-4/12 ml-4">
-                    <div class="md:flex md:flex-wrap md:items-center mb-4">
-                        <h2 class="text-3xl inline-block font-light md:mr-2 mb-2 sm:mb-0">
-                            {{$userPostCount->name}}
+                    <!-- profile meta -->
+                    <div class="w-8/12 md:w-4/12 ml-4">
+                        <div class="md:flex md:flex-wrap md:items-center mb-4">
+                            <h2 class="text-3xl inline-block font-light md:mr-2 mb-2 sm:mb-0">
+                                {{$userPostCount->name}}
 
-                        </h2>
+                            </h2>
 
-                        <!-- badge -->
-                        <span class="inline-block fas fa-certificate fa-lg text-blue-500 
+                            <!-- badge -->
+                            <span class="inline-block fas fa-certificate fa-lg text-blue-500 
                                relative mr-6  text-xl transform -translate-y-2" aria-hidden="true">
-                            <i class="fas fa-check text-white text-xs absolute inset-x-0
+                                <i class="fas fa-check text-white text-xs absolute inset-x-0
                                ml-1 mt-px"></i>
-                        </span>
+                            </span>
 
-                        <!-- Edit button -->
-                        <form method="post" action="{{route('allposts.follow')}}" enctype="multipart/form-data" accept-charset="UTF-8">
-                            {{ csrf_field()}}
-                            <input type="hidden" name="followz" value="{{ $userPostCount->id }}" />
+                            <!-- Edit button -->
+                            <form method="post" action="{{route('allposts.follow')}}" enctype="multipart/form-data" accept-charset="UTF-8">
+                                {{ csrf_field()}}
+                                <input type="hidden" name="followz" value="{{ $userPostCount->id }}" />
 
-                            <button class="bg-blue-500 px-2 py-1 
+                                <button class="bg-blue-500 px-2 py-1 
                         text-white font-semibold text-sm rounded block text-center 
                         sm:inline-block block hover:bg-blue-800" type="submit" <?php if ($userFollows != null) {
                                                                                     echo 'style="display: none;"';
                                                                                 } ?>>Follow</button>
-                        </form>
+                            </form>
 
-                        <form method="post" action="{{route('allposts.unfollow')}}" enctype="multipart/form-data" accept-charset="UTF-8">
-                            {{ csrf_field()}}
-                            <input type="hidden" name="followed" value="{{ $userPostCount->id }}" />
-                            <button class="bg-blue-500 px-2 py-1 
+                            <form method="post" action="{{route('allposts.unfollow')}}" enctype="multipart/form-data" accept-charset="UTF-8">
+                                {{ csrf_field()}}
+                                <input type="hidden" name="followed" value="{{ $userPostCount->id }}" />
+                                <button class="bg-blue-500 px-2 py-1 
                         text-white font-semibold text-sm rounded block text-center 
                         sm:inline-block block hover:bg-blue-800" <?php if ($userFollows == null) {
                                                                         echo 'style="display: none;"';
                                                                     } ?>>Unfollow</button>
-                        </form>
-                    </div>
+                            </form>
+                        </div>
 
                         <!-- post, following, followers list for medium screens -->
                         <ul class="hidden md:flex space-x-8 mb-4">
@@ -99,21 +99,21 @@ $userFollows = Follow::where('follower_id', $userId)->where('followed_id', $test
                                 posts
                             </li>
                             <li>
-                            <span class="font-semibold">{{$count}}</span>
-                            followers
-                        </li>
-                        <li>
-                            <span class="font-semibold">{{$count2}}</span>
-                            following
-                        </li>
+                                <span class="font-semibold">{{$count}}</span>
+                                followers
+                            </li>
+                            <li>
+                                <span class="font-semibold">{{$count2}}</span>
+                                following
+                            </li>
                         </ul>
 
-                    <!-- user meta form medium screens -->
-                    <div class="hidden md:block">
-                        <h1 class="font-semibold">{{$userPostCount->username}}</h1>
-                        <span class="bioclass">{{$userPostCount->website}}</span>
-                        <p>{{$userPostCount->bio}}</p>
-                    </div>
+                        <!-- user meta form medium screens -->
+                        <div class="hidden md:block">
+                            <h1 class="font-semibold">{{$userPostCount->username}}</h1>
+                            <span class="bioclass">{{$userPostCount->website}}</span>
+                            <p>{{$userPostCount->bio}}</p>
+                        </div>
 
                 </header>
 
@@ -158,24 +158,22 @@ $userFollows = Follow::where('follower_id', $userId)->where('followed_id', $test
                         <!-- post 1-->
                         @foreach ($posts as $post)
                         <?php
-            $postid= $post->id;
-            $likes = Like::where('post_id',$postid)->count();
-            ?>
+                        $postid = $post->id;
+                        $likes = Like::where('post_id', $postid)->count();
+                        ?>
 
                         <div class="w-96 md:w-80 m-4">
                             <div class="rounded-2xl shadow-xl h-fit bg-white text-gray-700">
                                 <div class="w-fit rounded overflow-hidden shadow-none">
                                     <header class="flex flex-start">
                                         <div>
-                                            <a href="#"
-                                                class="cursor-pointer m-4 flex items-center text-sm outline-none focus:outline-none focus:border-gray-300 transition duration-150 ease-in-out">
+                                            <a href="#" class="cursor-pointer m-4 flex items-center text-sm outline-none focus:outline-none focus:border-gray-300 transition duration-150 ease-in-out">
 
-                                                <img src="{{$userPostCount->img}}"
-                                                    class="h-9 w-9 rounded-full object-cover" alt="usuario" />
+                                                <img src="{{$userPostCount->img}}" class="h-9 w-9 rounded-full object-cover" alt="usuario" />
                                                 <div>
                                                     <p class="block ml-2 text-sm font-bold">{{$userPostCount->name}}</p>
                                                     <span class="block ml-2 text-xs text-gray-600">Published on {{$post->created_at->format('jS \of F Y')}} at {{$post->created_at->format('h:i A')}}</span>
-                                
+
                                                 </div>
                                             </a>
                                         </div>
@@ -189,8 +187,7 @@ $userFollows = Follow::where('follower_id', $userId)->where('followed_id', $test
 
                                             </div>
                                         </header>
-                                        <img class="h-96 md:h-80 object-cover max-w-full min-w-full" src="{{ $post->img_url }}"
-                                            alt="post">
+                                        <img class="h-96 md:h-80 object-cover max-w-full min-w-full" src="{{ $post->img_url }}" alt="post">
 
                                         <div class="px-6 pt-4">
                                             <div>

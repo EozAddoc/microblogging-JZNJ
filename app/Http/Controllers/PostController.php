@@ -42,16 +42,17 @@ class PostController extends Controller
         $posts = DB::table('posts')->where('user_id', auth()->id())->get();
         return view('profilePage', compact('posts'));
     }
-    
-    public function search (Request $request) {
+
+    public function search(Request $request)
+    {
         $query = $request->input('query');
 
         $users = DB::table('users')
             ->where('name', 'like', "%$query%")
             ->orWhere('username', 'like', "%$query%")
             ->get();
-  
-        return view('profile.users',compact('users'));
+
+        return view('profile.users', compact('users'));
     }
 
     public function findById($toto)
@@ -117,7 +118,7 @@ class PostController extends Controller
         //         'success' => 'Like added successfully.'
         //     ]);
         // }
-    return redirect()->back();
+        return redirect()->back();
     }
 
     /**
